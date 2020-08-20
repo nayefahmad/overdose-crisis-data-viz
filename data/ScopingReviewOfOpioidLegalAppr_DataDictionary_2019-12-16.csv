@@ -1,0 +1,317 @@
+﻿"Variable / Field Name","Form Name","Section Header","Field Type","Field Label","Choices, Calculations, OR Slider Labels","Field Note","Text Validation Type OR Show Slider Number","Text Validation Min","Text Validation Max",Identifier?,"Branching Logic (Show field only if...)","Required Field?","Custom Alignment","Question Number (surveys only)","Matrix Group Name","Matrix Ranking?","Field Annotation"
+record_id,data_extraction_form,,text,"Record ID (Author_Year)",,,,,,,,,,,,,
+paper_type,data_extraction_form,,radio,"What research domain?
+
+You can change this designation if you disagree with the label.","1, Health Sciences | 2, Social Sciences | 3, Legal",,,,,,,,,,,,
+cc,data_extraction_form,,yesno,"Citation chaining?
+
+Ignore this field. Colleen uses this to track papers that come from citation chaining.",,,,,,,,,,,,," @HIDDEN"
+name,data_extraction_form,,text,"First name of data extractor
+",,,,,,,,,,,,,
+dv_name,data_extraction_form,,text,"First name of data validator
+",,,,,,,,,,,,,
+pdf,data_extraction_form,,file,"PDF of article
+
+If no file uploaded or the incorrect file is uploaded you can find all files in the  <a href=""https://drive.google.com/drive/folders/159mED7pQiXchPndAoq3_3SXPDXUBEWFr?usp=sharing"" target=""_blank"">GoogleDrive folder</a>",,,,,,,,,,,,,
+exclusions,data_extraction_form,Exclusions,yesno,"Should this study/articles be excluded?
+
+ <a href=""https://docs.google.com/document/d/1Ncf7RztcNs9NP0CynbRpuTMc95OAR5N3vmU98PBPIB8/edit?usp=sharing"" target=""blank"">Click here for a description of study inclusion/exclusion criteria</a>
+
+",,,,,,,,,,,,,
+exclusions_reason,data_extraction_form,,radio,"Why should this article be excluded?
+
+ <a href=""https://docs.google.com/spreadsheets/d/1vRpAQV4JExKIOJauMbs5Py6NdKQnOfJ1L6JBSRyV4mE/edit#gid=1024004368"" target=""blank"">Click here for a description of the exclusion reasons</a>
+
+
+","1, Wrong publication type | 2, Non-opioid | 3, No legal approach | 4, Historical | 5, Foreign policy | 6, Implementation | 7, Efficacy | 8, Theoretical | 9, Ongoing | 10, Foreign Language | 11, Full-text not available | 12, Duplicate",,,,,,"[exclusions] = '1'",,,,,,
+country_exclude,data_extraction_form,,dropdown,"Specify the country of the historical review
+","1, Afghanistan | 2, Albania | 3, Algeria | 4, Angola | 5, Antigua and Barbuda | 6, Argentina | 7, Armenia | 8, Australia | 9, Austria | 10, Azerbaijan | 11, The Bahamas | 12, Bahrain | 13, Bangladesh | 14, Barbados | 15, Belarus | 16, Belgium | 17, Belize | 18, Benin | 19, Bhutan | 20, Bolivia | 21, Bosnia and Herzegovina | 22, Botswana | 23, Brazil | 24, Brunei | 25, Bulgaria | 26, Burkina Faso | 27, Burundi | 28, Cambodia | 29, Cameroon | 30, Canada | 31, Cape Verde | 32, Central African Republic | 33, Chad | 34, Chile | 35, Colombia | 36, Comoros | 37, Democratic Republic of the Congo | 38, Republic of the Congo | 39, Costa Rica | 40, Côte d'Ivoire | 41, Croatia | 42, Cyprus | 43, Czech Republic | 44, Denmark | 45, Djibouti | 46, Dominica | 47, Dominican Republic | 48, East Timor | 49, Ecuador | 50, Egypt | 51, El Salvador | 52, Equatorial Guinea | 53, Eritrea | 54, Estonia | 55, Ethiopia | 56, Fiji | 57, Finland | 58, France | 59, Gabon | 60, Gambia | 61, Georgia | 62, Germany | 63, Ghana | 64, Greece | 65, Grenada | 66, Guatemala | 67, Guinea | 68, Guinea-Bissau | 69, Guyana | 70, Haiti | 71, Honduras | 72, Hungary | 73, Iceland | 74, India | 75, Indonesia | 76, Iran | 77, Iraq | 78, Ireland | 79, Israel | 80, Italy | 81, Jamaica | 82, Japan | 83, Jordan | 84, Kazakhstan | 85, Kenya | 86, Kiribati | 87, Kosovo | 88, Kuwait | 89, Kyrgyzstan | 90, Laos | 91, Latvia | 92, Lebanon | 93, Lesotho | 94, Liberia | 95, Libya | 96, Lithuania | 97, Luxembourg | 98, Macedonia | 99, Madagascar | 100, Malawi | 101, Malaysia | 102, Maldives | 103, Mali | 104, Malta | 105, Marshall Islands | 106, Mauritania | 107, Mauritius | 108, Mexico | 109, Federated States of Micronesia | 110, Moldova | 111, Mongolia | 112, Montenegro | 113, Morocco | 114, Mozambique | 115, Myanmar | 116, Namibia | 117, Nauru | 118, Nepal | 119, Netherlands | 120, New Zealand | 121, Nicaragua | 122, Niger | 123, Nigeria | 124, Norway | 125, Oman | 126, Pakistan | 127, Palau | 128, Panama | 129, Papua New Guinea | 130, Paraguay | 131, People's Republic of China | 132, Peru | 190, Puerto Rico | 133, Philippines | 134, Poland | 135, Portugal | 136, Qatar | 137, Romania | 138, Russia | 139, Rwanda | 140, Saint Kitts and Nevis | 141, Saint Lucia | 142, Saint Vincent and the Grenadines | 143, Samoa | 144, San Marino | 145, São Tomé and Príncipe | 146, Saudi Arabia | 147, Senegal | 148, Serbia | 149, Seychelles | 150, Sierra Leone | 151, Singapore | 152, Slovakia | 153, Slovenia | 154, Solomon Islands | 155, Somalia | 156, South Africa | 157, South Korea | 158, South Sudan | 159, Spain | 160, Sri Lanka | 161, Sudan | 162, Suriname | 163, Swaziland | 164, Sweden | 165, Switzerland | 166, Syria | 167, Tajikistan | 168, Tanzania | 169, Thailand | 170, Togo | 171, Tonga | 172, Trinidad and Tobago | 173, Tunisia | 174, Turkey | 175, Turkmenistan | 176, Tuvalu | 177, Uganda | 178, Ukraine | 179, United Arab Emirates | 180, United Kingdom | 181, United States | 182, Uruguay | 183, Uzbekistan | 184, Vanuatu | 185, Venezuela | 186, Vietnam | 187, Yemen | 188, Zambia | 189, Zimbabwe",,autocomplete,,,,"[exclusions_reason] = '4'",,,,,,
+comments_exclusion,data_extraction_form,,notes,"Comments on why it should be excluded?",,,,,,,"[exclusions] = '1'",,,,,,
+year_pub,data_extraction_form,"Basic Article Information",text,"Year Published",,,,,,,,,,,,,
+country_yn,data_extraction_form,,yesno,"Is the data presented in the study/article from only one country? 
+",,,,,,,,,,,,,
+country,data_extraction_form,,dropdown,"Specify the single country in which the data were collected. Code the country's global region in the next field
+","1, Afghanistan | 2, Albania | 3, Algeria | 4, Angola | 5, Antigua and Barbuda | 6, Argentina | 7, Armenia | 8, Australia | 9, Austria | 10, Azerbaijan | 11, The Bahamas | 12, Bahrain | 13, Bangladesh | 14, Barbados | 15, Belarus | 16, Belgium | 17, Belize | 18, Benin | 19, Bhutan | 20, Bolivia | 21, Bosnia and Herzegovina | 22, Botswana | 23, Brazil | 24, Brunei | 25, Bulgaria | 26, Burkina Faso | 27, Burundi | 28, Cambodia | 29, Cameroon | 30, Canada | 31, Cape Verde | 32, Central African Republic | 33, Chad | 34, Chile | 35, Colombia | 36, Comoros | 37, Democratic Republic of the Congo | 38, Republic of the Congo | 39, Costa Rica | 40, Côte d'Ivoire | 41, Croatia | 42, Cyprus | 43, Czech Republic | 44, Denmark | 45, Djibouti | 46, Dominica | 47, Dominican Republic | 48, East Timor | 49, Ecuador | 50, Egypt | 51, El Salvador | 52, Equatorial Guinea | 53, Eritrea | 54, Estonia | 55, Ethiopia | 56, Fiji | 57, Finland | 58, France | 59, Gabon | 60, Gambia | 61, Georgia | 62, Germany | 63, Ghana | 64, Greece | 65, Grenada | 66, Guatemala | 67, Guinea | 68, Guinea-Bissau | 69, Guyana | 70, Haiti | 71, Honduras | 72, Hungary | 73, Iceland | 74, India | 75, Indonesia | 76, Iran | 77, Iraq | 78, Ireland | 79, Israel | 80, Italy | 81, Jamaica | 82, Japan | 83, Jordan | 84, Kazakhstan | 85, Kenya | 86, Kiribati | 87, Kosovo | 88, Kuwait | 89, Kyrgyzstan | 90, Laos | 91, Latvia | 92, Lebanon | 93, Lesotho | 94, Liberia | 95, Libya | 96, Lithuania | 97, Luxembourg | 98, Macedonia | 99, Madagascar | 100, Malawi | 101, Malaysia | 102, Maldives | 103, Mali | 104, Malta | 105, Marshall Islands | 106, Mauritania | 107, Mauritius | 108, Mexico | 109, Federated States of Micronesia | 110, Moldova | 111, Mongolia | 112, Montenegro | 113, Morocco | 114, Mozambique | 115, Myanmar | 116, Namibia | 117, Nauru | 118, Nepal | 119, Netherlands | 120, New Zealand | 121, Nicaragua | 122, Niger | 123, Nigeria | 124, Norway | 125, Oman | 126, Pakistan | 127, Palau | 128, Panama | 129, Papua New Guinea | 130, Paraguay | 131, People's Republic of China | 190, Puerto Rico | 132, Peru | 133, Philippines | 134, Poland | 135, Portugal | 136, Qatar | 137, Romania | 138, Russia | 139, Rwanda | 140, Saint Kitts and Nevis | 141, Saint Lucia | 142, Saint Vincent and the Grenadines | 143, Samoa | 144, San Marino | 145, São Tomé and Príncipe | 146, Saudi Arabia | 147, Senegal | 148, Serbia | 149, Seychelles | 150, Sierra Leone | 151, Singapore | 152, Slovakia | 153, Slovenia | 154, Solomon Islands | 155, Somalia | 156, South Africa | 157, South Korea | 158, South Sudan | 159, Spain | 160, Sri Lanka | 161, Sudan | 162, Suriname | 163, Swaziland | 164, Sweden | 165, Switzerland | 166, Syria | 167, Tajikistan | 168, Tanzania | 169, Thailand | 170, Togo | 171, Tonga | 172, Trinidad and Tobago | 173, Tunisia | 174, Turkey | 175, Turkmenistan | 176, Tuvalu | 177, Uganda | 178, Ukraine | 179, United Arab Emirates | 180, United Kingdom | 181, United States | 182, Uruguay | 183, Uzbekistan | 184, Vanuatu | 185, Venezuela | 186, Vietnam | 187, Yemen | 188, Zambia | 189, Zimbabwe",,autocomplete,,,,"[country_yn] = '1'",,,,,,
+country_income,data_extraction_form,,checkbox,"Specify whether the single country is high income, middle-income, or low-middle income. 
+Based on World Bank classification system.
+
+ <a href=""https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups"" target=""blank"">Click here for full list</a>
+
+
+
+","1, High income | 2, Upper-middle income | 3, Lower-middle income | 4, Low income",,,,,,"[country_yn] = '1'",,,,,,
+country_region,data_extraction_form,,checkbox,"Code the global region of the country/ countries where the data were collected. Based on the World Bank classification system
+
+ <a href=""https://datahelpdesk.worldbank.org/knowledgebase/articles/906519-world-bank-country-and-lending-groups"" target=""blank"">Click here for full list</a>
+
+
+
+
+
+
+
+
+
+
+","1, East Asia and Pacific | 2, Europe and Central Asia | 3, Latin America & the Caribbean | 4, Middle East and North Africa | 5, North America | 6, South Asia | 7, Sub-Saharan Africa",,,,,,,,,,,,
+target_substance,data_extraction_form,,checkbox,"What is the target substance?","A, Opioids | B, Cannabis | C, Methamphetamines | D, Cocaine | E, Benzodiazepines | F, Other",,,,,,,,,,,,
+population_specific,data_extraction_form,,checkbox,"Study population. The following two questions refer to the population(s) that the investigated legal/policy approach would impact, by either targeting or affecting a group (or both). For example, treatment guidelines on opioid prescribing would <u>target</u> clinicians but would <u>affect</u> the general population.
+
+Specify the population(s) the legal or policy approach <u>TARGETS</u>.","0, General population | 1, People who use illegal drugs | 2, Clinical practitioners | 3, Women | 4, Youth | 5, Indigenous | 6, People involved with corrections/who have been incarcerated | 7, Chronic opioid users | 9, People with chronic pain | 999, Other",,,,,,,,,,,,
+population_other,data_extraction_form,,text,"What other population does the legal or policy approach target?",,,,,,,"[population_specific(999)] = '1'",,,,,,
+population_specific_affect,data_extraction_form,,checkbox,"Specify the population(s) the legal or policy approach <u>AFFECTS</u>.","0, General population | 1, People who use illegal drugs | 2, Clinical practitioners | 3, Women | 4, Youth | 5, Indigenous | 6, People involved with corrections/who have been incarcerated | 7, Chronic opioid users | 9, People with chronic pain | 999, Other",,,,,,,,,,,,
+population_other_2,data_extraction_form,,text,"What other population does the legal or policy approach affect?",,,,,,,"[population_specific_affect(999)] = '1'",,,,,,
+competing_interests_yn,data_extraction_form,,yesno,"Is there a conflict of interest declaration?",,,,,,,,,,,,,
+competing_interests,data_extraction_form,,radio,"Specify if authors have any competing interests","1, Yes | 2, No | 3, Unclear",,,,,,"[competing_interests_yn] = '1'",,,,,,
+empirical,data_extraction_form,"Study design and data sources",radio,"Is the article empirical or non-empirical? 
+
+An empirical article includes primary data collection and/or analysis","1, empirical | 2, non-empirical",,,,,,,,,,,,
+year_study,data_extraction_form,,text,"Last year of data collected for the study?",,,,,,,"[empirical] = '1'",,,,,,
+study_design,data_extraction_form,,checkbox,"Study design
+
+ <a href=""https://drive.google.com/file/d/1pM4lCNHK_XdFH4hzMtQ_3snrfALU2TFg/view?usp=sharing"" target=""blank"">Click here for an overview of different study designs </a>
+
+Questions to help determine study design:
+
+1. Single study or a search/synthesis of multiple studies?
+&nbsp&nbsp&nbsp&nbsp a. Multiple => systematic or scoping review
+&nbsp&nbsp&nbsp&nbsp b. Single study => go to next question
+
+2. Experimental or observational study?
+&nbsp&nbsp&nbsp&nbsp a. Experimental => randomized controlled trial
+&nbsp&nbsp&nbsp&nbsp b. Observational => go to next question
+
+3. Unit of analysis?
+&nbsp&nbsp&nbsp&nbsp a. Group or population-level => Ecological study
+&nbsp&nbsp&nbsp&nbsp i. If looking at time trends or 'before-and-after', then also select time-series/temporal 
+&nbsp&nbsp&nbsp&nbsp ii. If looking at different regions/geographic units, then also select geographic 
+&nbsp&nbsp&nbsp&nbsp b. Individual => go to next question
+
+4. Is there a control comparison group?
+&nbsp&nbsp&nbsp&nbsp a. No => Case study (individual) or case series (multiple)
+&nbsp&nbsp&nbsp&nbsp b. Yes => go to next question
+
+5. Exposure and outcome?
+&nbsp&nbsp&nbsp&nbsp a. Are assessed simultaneously => Cross-sectional
+&nbsp&nbsp&nbsp&nbsp b. Study participants are selected based on outcome and then exposure is assessed retrospectively => Case-control
+&nbsp&nbsp&nbsp&nbsp c. Study participants are selected (may/may not be based on exposure) and then outcomes are tracked over time => Cohort-study
+","1, Systematic review | 2, Scoping review | 3, Randomized controlled trial | 4, Cohort study | 5, Cross-sectional study | 7, Ecological study | 6, Ecological | Time-series study | 8, Ecological | Geographic study | 9, Case study | 10, Case series | 999, Other",,,,,,"[empirical] = '1'",,,,,,
+study_design_other,data_extraction_form,,text,"What other study design",,,,,,,"[study_design(999)] = '1'",,,,,,
+longitudinal_yn,data_extraction_form,,yesno,"Does the study report longitudinal data?
+
+",,,,,,,"[study_design(3)] = '1'",,,,,,
+data_sources,data_extraction_form,,checkbox,"Data sources
+
+
+
+
+
+","1, Administrative data (ex. Medical billings) | 2, Qualitative data | 3, Survey data | 6, Census data | 4, Chart reviews / Medical records | 5, Other studies | 999, Other",,,,,,"[empirical] = '1'",,,,,,
+data_sources_other,data_extraction_form,,text,"What other data source?",,,,,,,"[data_sources(999)] = '1'",,,,,,
+analysis,data_extraction_form,,checkbox,"Analysis. Select the different analytic approaches that were used in this study (select all that apply). 
+
+
+
+
+
+
+
+
+
+
+
+
+","0, Descriptive - Does the study only describe features of a policy/legal approach, a study population, or trends over time, without any other analyses? | 1, Hypothesis testing - Does the study declare and test one or more explicitly stated hypotheses? | 2, Generates estimates of rates - Does the study generate estimates of rates (ex. Prevalence, incidence)? | 3, Modelling - Does the study perform modeling? | 6, Generates estimates of risk - Does the study generate estimates of risk (ex. Relative risk, odds ratios, hazard ratios)? | 4, Comparative - Does the study compare two or more populations? Note that this does not refer to a control and study group, but to two or more different study populations (ex. Multiple study sites, multiple regions). | 5, Longitudinal - Does the study analyze two different time periods (ex. Joinpoint regression analysis)? Note that descriptions of time trends without an analytic approach does not qualify. | 7, Simulation - Does the study perform an analysis of simulated data or results? | 8, Qualitative analysis - Does the study use a qualitative analysis approach (ex. Grounded theory methodology)? | 999, Other",,,,,,"[empirical] = '1'",,,,,," @HIDECHOICE='3'"
+analysis_other,data_extraction_form,,text,"What other analysis?",,,,,,,"[analysis(999)] = '1'",,,,,,
+policy_type,data_extraction_form,"Policy type and possible outcomes",checkbox,"Specify the type of policy that the article/study examines. Clock on all that apply.
+
+Legal rulings = decisions made in courts. Examples include case law, supreme court rulings, etc
+
+Legislation = A bill or act enacted by government (ie, statutory law). Examples include Prescription Drug Monitoring Programs and Cannabis legalization
+
+Regulation = Documents that define the application and enforcement of legislation
+
+Government policy = A stated goal of government (not binding on government), decisions made by government officials 
+
+Guidelines = Documents that set out how a department, regulatory authority or other body applies laws and regulations under their jurisdiction. Examples are treatment guidelines released by a College of Physicians
+
+Programs = Activities administered by a ministry or regulatory authority (ie, hospital); includes grant-funded programs and pilot government projects
+
+Strategies = Documents that determine the plan of action/orientation of a government or regulatory authority. Examples are the War on Drugs or Prohibition
+
+","1, Legal rulings | 2, Legislation | 3, Regulation | 4, Government policy | 5, Guidelines | 6, Standards | 7, Programs | 8, Strategies",,,,,,,,,,,,
+gov_level,data_extraction_form,,checkbox,"What government level?","1, Federal | 2, State/ Provincial | 3, Municipal | 4, International (United Nations treaties, legislation)",,,,,,"[policy_type(2)] = '1' or [policy_type(4)] = '1'",,,,,,
+court_level,data_extraction_form,,checkbox,"What level of court?","1, Supreme court | 2, Federal court | 3, State / Provincial court | 4, Municipal / District court | 5, E.U. Courts | 6, UN Courts",,,,,,"[policy_type(1)] = '1'",,,,,,
+appeal_yn,data_extraction_form,,yesno,"Was it an appeal?",,,,,,,"[policy_type(1)] = '1'",,,,,,
+policies,data_extraction_form,,checkbox,"Identify specific policy within each policy domain that is addressed in the article. Select all that apply.
+
+1. Criminal justice 
+a. Drug Courts
+b. Punitive charges for drug use/drug dealing. Includes Drinking Under Influence laws
+
+2. Legislative 
+a. Regulation of prescription drugs. Example: Prescription drug monitoring programs, Ontario narcotics safety and awareness act
+b. Illicit drug policies (including 'War on Drugs'). Example: US controlled substances act
+&nbsp&nbsp&nbsp&nbspb.i. Decriminalization
+&nbsp&nbsp&nbsp&nbspb.ii. Legalization
+c. first responders (ex. Good Samaritan Laws)
+ 
+3. Law enforcement 
+a. Policing tactics
+b. Police presence
+c. other - text entry
+
+4. Harm reduction 
+a. Needle and syringe exchanges/availability
+b. Supervised injection
+&nbsp&nbsp&nbsp&nbspb.i. Supervised injection site
+&nbsp&nbsp&nbsp&nbspb.ii. Overdose prevention site
+c. drug testing services
+
+5. Prescription drug regulations 
+a. Drug rescheduling
+b. Changes in drug formulations (ex. Abuse-deterrent oxycontin)
+c. Withdrawing drug from market
+
+6. Clinical treatments 
+a. availability of opioid agonist/antagonist treatment 
+&nbsp&nbsp&nbsp&nbspa.i. provider targeted  - doctors
+&nbsp&nbsp&nbsp&nbspa.i. provider targeted - pharmacists
+b. opioid prescribing standards/guidelines
+&nbsp&nbsp&nbsp&nbspa.i. provider targeted - doctors
+&nbsp&nbsp&nbsp&nbspa.i. provider targeted - pharmacists 
+c. compulsory treatment centres/programs
+ 
+7. Social services 
+a. Welfare expansion/reform
+b. Medical insurance changes (restriction/expansion/reform). Ex: US affordable care act
+c. Restrictions (ex. Vouchers)
+ 
+8. International 
+a. international drug treaties
+
+ 
+","1, Criminal justice | 2, Legislative | 3, Law enforcement | 4, Harm reduction | 5, Prescription drug regulations | 6, Clinical treatments | 7, Social services | 8, International | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,,,,,,,
+policy_criminal,data_extraction_form,,checkbox,"What specific criminal justice policy(-ies)?","1, Drug Courts | 2, Punitive charges for drug use/drug dealing. Includes DUI laws | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[policies(1)] = '1'",,,,,,
+policy_criminal_other,data_extraction_form,,text,"What other criminal justice policy/policies?",,,,,,,"[policy_criminal(999)] = '1'",,,,,,
+policy_criminal_other_2,data_extraction_form,,text,"What other criminal justice policy/policies?",,,,,,,"[policy_criminal(998)] = '1'",,,,,,
+policy_criminal_other_3,data_extraction_form,,text,"What other criminal justice policy/policies?",,,,,,,"[policy_criminal(997)] = '1'",,,,,,
+policy_legislative,data_extraction_form,,checkbox,"What specific Legislative policy(-ies)?","1, Regulation of prescription drugs. Example: Prescription drug monitoring programs, Ontario narcotics safety and awareness act | 2, Illicit drug policies (including 'War on Drugs'). Example: US controlled substances act | 3, Decriminalization | 4, Legalization | 5, first responders (ex. Good Samaritan Laws) | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[policies(2)] = '1'",,,,,,
+policy_legislative_other,data_extraction_form,,text,"What other legislative policy/policies?",,,,,,,"[policy_legislative(999)] = '1'",,,,,,
+policy_legislative_other_2,data_extraction_form,,text,"What other legislative policy/policies?",,,,,,,"[policy_legislative(998)] = '1'",,,,,,
+policy_legislative_other_3,data_extraction_form,,text,"What other legislative policy/policies?",,,,,,,"[policy_legislative(997)] = '1'",,,,,,
+policy_law_enforce,data_extraction_form,,checkbox,"What specific law enforcement policies?","1, Policing tactics | 2, Police presence | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[policies(3)] = '1'",,,,,,
+policy_law_enforce_other,data_extraction_form,,text,"What other law enforcement policy?",,,,,,,"[policy_law_enforce(999)] = '1'",,,,,,
+policy_law_enforce_other_2,data_extraction_form,,text,"What other law enforcement policy?",,,,,,,"[policy_law_enforce(998)] = '1'",,,,,,
+policy_law_enforce_other_3,data_extraction_form,,text,"What other law enforcement policy?",,,,,,,"[policy_law_enforce(997)] = '1'",,,,,,
+policy_harm,data_extraction_form,,checkbox,"What specific Harm reduction policy/policies?","1, Needle and syringe exchanges/availability | 3, Supervised injection site | 4, Overdose prevention site | 5, drug testing services | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[policies(4)] = '1'",,,,,,
+policy_harm_other,data_extraction_form,,text,"What other harm reduction policy/policies?",,,,,,,"[policy_harm(999)] = '1'",,,,,,
+policy_harm_other_2,data_extraction_form,,text,"What other harm reduction policy/policies?",,,,,,,"[policy_harm(998)] = '1'",,,,,,
+policy_harm_other_3,data_extraction_form,,text,"What other harm reduction policy/policies?",,,,,,,"[policy_harm(997)] = '1'",,,,,,
+policy_prescription,data_extraction_form,,checkbox,"What specific Prescription drug regulation(s)?
+","1, Drug rescheduling | 2, Changes in drug formulations (ex. Abuse-deterrent oxycontin) | 3, Withdrawing drug from market | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[policies(5)] = '1'",,,,,,
+policy_prescription_other,data_extraction_form,,text,"What other Prescription drug regulation?
+",,,,,,,"[policy_prescription(999)] = '1'",,,,,,
+policy_prescription_other_2,data_extraction_form,,text,"What other Prescription drug regulation?
+",,,,,,,"[policy_prescription(998)] = '1'",,,,,,
+policy_prescription_other_3,data_extraction_form,,text,"What other Prescription drug regulation?
+",,,,,,,"[policy_prescription(997)] = '1'",,,,,,
+policy_clinical,data_extraction_form,,checkbox,"What specific clinical treatment policy/policies?","1, availability of opioid agonist/antagonist treatment | 2, availability of opioid agonist/antagonist treatment - provider targeted  - doctors | 3, availability of opioid agonist/antagonist treatment - provider targeted - pharmacists | 4, opioid prescribing standards/guidelines | 5, opioid prescribing standards/guidelines -  provider targeted - doctors | 6, opioid prescribing standards/guidelines - provider targeted - pharmacists | 7, compulsory treatment centres/programs | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[policies(6)] = '1'",,,,,,
+policy_clinical_other,data_extraction_form,,text,"What other clinical treatment policy/policies?",,,,,,,"[policy_clinical(999)] = '1'",,,,,,
+policy_clinical_other_2,data_extraction_form,,text,"What other clinical treatment policy/policies?",,,,,,,"[policy_clinical(998)] = '1'",,,,,,
+policy_clinical_other_3,data_extraction_form,,text,"What other clinical treatment policy/policies?",,,,,,,"[policy_clinical(997)] = '1'",,,,,,
+policy_social,data_extraction_form,,checkbox,"What specific Social services policy/policies?","1, Welfare expansion/reform | 2, Medical insurance changes (restriction/expansion/reform). Ex: US affordable care act | 3, Restrictions (ex. Vouchers) | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[policies(7)] = '1'",,,,,,
+policy_social_other,data_extraction_form,,text,"What other social services policy/policies?",,,,,,,"[policy_social(999)] = '1'",,,,,,
+policy_social_other_2,data_extraction_form,,text,"What other social services policy/policies?",,,,,,,"[policy_social(998)] = '1'",,,,,,
+policy_social_other_3,data_extraction_form,,text,"What other social services policy/policies?",,,,,,,"[policy_social(997)] = '1'",,,,,,
+policy_international,data_extraction_form,,checkbox,"What specific international policy/policies?","1, international drug treaties | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[policies(8)] = '1'",,,,,,
+policy_international_other,data_extraction_form,,text,"What other international policy/policies?",,,,,,,"[policy_international(999)] = '1'",,,,,,
+policy_international_other_2,data_extraction_form,,text,"What other international policy/policies?",,,,,,,"[policy_international(998)] = '1'",,,,,,
+policy_international_other_3,data_extraction_form,,text,"What other international policy/policies?",,,,,,,"[policy_international(997)] = '1'",,,,,,
+policy_theme_other,data_extraction_form,,text,"Which other policy theme?",,,,,,,"[policies(999)] = '1'",,,,,,
+policy_theme_other_2,data_extraction_form,,text,"Which other policy theme?",,,,,,,"[policies(998)] = '1'",,,,,,
+policy_theme_other_3,data_extraction_form,,text,"Which other policy theme?",,,,,,,"[policies(997)] = '1'",,,,,,
+outcomes_yn,data_extraction_form,,radio,"Specify whether outcomes are assessed
+","1, Yes | 0, No | 999, Unclear",,,,,,,,,,,,
+outcome_type,data_extraction_form,,checkbox,"Specify the outcome type(s) assessed in the article.
+","1, Prescription drug availability / use | 10, Non-prescription drug availability / use (i.e. over the counter) | 2, Illegal drug availability / use | 3, Substance use treatment | 4, Overdose rates | 5, Criminal activity | 6, Infectious disease rates | 7, Illegal Drug use behaviors and harms | 8, Health and social services system costs | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[outcomes_yn] = '1'",,,,,,
+outcomes_prescription,data_extraction_form,,checkbox,"Specify the specific Prescription drug availability outcome(s) assessed in the article.
+","1, Opioid prescribing rates | 2, Opioid prescribing behaviors | 3, Opioid availability | 5, Opioid prescription fills / dispensing | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[outcome_type(1)] = '1'",,,,,,
+outcomes_pres_other,data_extraction_form,,text,"What other prescription drug outcome?",,,,,,,"[outcomes_prescription(999)] = '1'",,,,,,
+outcomes_pres_other_2,data_extraction_form,,text,"What other prescription drug outcome?",,,,,,,"[outcomes_prescription(998)] = '1'",,,,,,
+outcomes_pres_other_3,data_extraction_form,,text,"What other prescription drug outcome?",,,,,,,"[outcomes_prescription(997)] = '1'",,,,,,
+impact_opr,data_extraction_form,,checkbox,"What is the impact of the policy on opioid prescribing rates?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_prescription(1)] = '1'",,,,,,
+impact_opb,data_extraction_form,,checkbox,"What is the impact of the policy on Opioid prescribing behaviors?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_prescription(2)] = '1'",,,,,,
+impact_oa,data_extraction_form,,checkbox,"What is the impact of the policy on opioid availability?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_prescription(3)] = '1'",,,,,,
+impact_ou,data_extraction_form,,checkbox,"What is the impact of the policy on opioid prescription fills / dispensing?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_prescription(5)] = '1'",,,,,,
+impact_pres_other,data_extraction_form,,checkbox,"What is the impact of the other prescription drug policy?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_prescription(999)] = '1'",,,,,,
+outcomes_non_pres,data_extraction_form,,checkbox,"Specify the specific illegal drug availability/use outcome(s) assessed in the article.
+","1, Illegal drug availability | 2, Illegal drug use | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[outcome_type(2)] = '1'",,,,,,
+outcome_non_pres_other,data_extraction_form,,text,"What other illegal drug outcome?",,,,,,,"[outcomes_non_pres(999)] = '1'",,,,,,
+outcome_non_pres_other_2,data_extraction_form,,text,"What other illegal drug outcome?",,,,,,,"[outcomes_non_pres(998)] = '1'",,,,,,
+outcome_non_pres_other_3,data_extraction_form,,text,"What other illegal drug outcome?",,,,,,,"[outcomes_non_pres(997)] = '1'",,,,,,
+impact_non_pres_avail,data_extraction_form,,checkbox,"What is the impact of the policy on illegal drug availability/use ?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_non_pres(1)] = '1'",,,,,,
+impact_non_pres_use,data_extraction_form,,checkbox,"What is the impact of the policy on illicit drug use?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_non_pres(2)] = '1'",,,,,,
+impact_non_pres_other,data_extraction_form,,checkbox,"What is the impact of the policy on the other non-prescription drug outcome?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_non_pres(999)] = '1'",,,,,,
+outcomes_treatment,data_extraction_form,,checkbox,"Specify the specific substance use treatment outcome(s) assessed in the article.","1, Access | 2, Treatment for opioid agonist/antagonist/substitution treatment | 999, Other facilities | 998, Other -2 | 997, Other -3",,,,,,"[outcome_type(3)] = '1'",,,,,,
+outcomes_treatment_other,data_extraction_form,,text,"What other substance use treatment outcomes?",,,,,,,"[outcomes_treatment(999)] = '1'",,,,,,
+outcomes_treatment_other_2,data_extraction_form,,text,"What other substance use treatment outcomes?",,,,,,,"[outcomes_treatment(998)] = '1'",,,,,,
+outcomes_treatment_other_3,data_extraction_form,,text,"What other substance use treatment outcomes?",,,,,,,"[outcomes_treatment(997)] = '1'",,,,,,
+impact_access,data_extraction_form,,checkbox,"What is the impact of the policy on access?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_treatment(1)] = '1'",,,,,,
+impact_tfo,data_extraction_form,,checkbox,"What is the impact of the policy on treatment for OAT/ OST?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_treatment(2)] = '1'",,,,,,
+impact_of,data_extraction_form,,checkbox,"What is the impact of the policy on other facilities?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_treatment(999)] = '1'",,,,,,
+impact_of_2,data_extraction_form,,checkbox,"What is the impact of the policy on other facilities?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_treatment(998)] = '1'",,,,,,
+impact_of_3,data_extraction_form,,checkbox,"What is the impact of the policy on other facilities?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcomes_treatment(997)] = '1'",,,,,,
+impact_overdose,data_extraction_form,,checkbox,"What is the impact of the policy on overdose rates?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_type(4)] = '1'",,,,,,
+impact_crim,data_extraction_form,,checkbox,"What is the impact of the policy on crime activity?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_type(5)] = '1'",,,,,,
+outcome_infectious,data_extraction_form,,checkbox,"Specify the specific infectious disease rates outcome(s) assessed in the article.","1, HIV | 2, HepC | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[outcome_type(6)] = '1'",,,,,,
+outcome_infectious_other,data_extraction_form,,text,"What other infection disease outcome",,,,,,,"[outcome_infectious(999)] = '1'",,,,,,
+outcome_infectious_other_2,data_extraction_form,,text,"What other infection disease outcome",,,,,,,"[outcome_infectious(998)] = '1'",,,,,,
+outcome_infectious_other_3,data_extraction_form,,text,"What other infection disease outcome",,,,,,,"[outcome_infectious(997)] = '1'",,,,,,
+impact_hiv,data_extraction_form,,checkbox,"What is the impact of the policy on HIV rates?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_infectious(1)] = '1'",,,,,,
+impact_hepc,data_extraction_form,,checkbox,"What is the impact of the policy on Hep C rates?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_infectious(2)] = '1'",,,,,,
+impact_infect_other,data_extraction_form,,checkbox,"What is the impact of the policy on the other infectious disease outcome?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_infectious(999)] = '1'",,,,,,
+outcome_illegal,data_extraction_form,,checkbox,"Specify the specific Illegal drug use behaviors and harms assessed in this article?","1, injection drug use | 2, drug-use related injuries | 999, Other-1 | 998, Other-2 | 997, Other-3",,,,,,"[outcome_type(7)] = '1'",,,,,,
+outcome_illegal_other,data_extraction_form,,text,"What other illegal drug behaviors or harms?",,,,,,,"[outcome_illegal(999)] = '1'",,,,,,
+outcome_illegal_other_2,data_extraction_form,,text,"What other illegal drug behaviors or harms?",,,,,,,"[outcome_illegal(998)] = '1'",,,,,,
+outcome_illegal_other_3,data_extraction_form,,text,"What other illegal drug behaviors or harms?",,,,,,,"[outcome_illegal(997)] = '1'",,,,,,
+impact_idu,data_extraction_form,,checkbox,"What is the impact of the policy on injection drug use?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_illegal(1)] = '1'",,,,,,
+impact_dui,data_extraction_form,,checkbox,"What is the impact of the policy on drug-use related injuries?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_illegal(2)] = '1'",,,,,,
+impact_dui_2,data_extraction_form,,checkbox,"What is the impact of the other policy on drug-use behaviors or harms?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_illegal(999)] = '1'",,,,,,
+impact_health,data_extraction_form,,checkbox,"What is the impact of the policy on Health and social services system costs?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_type(8)] = '1'",,,,,,
+impact_non_pres_avail_2,data_extraction_form,,checkbox,"Specify the specific impact on non-prescription drug availability / use? ","1, Non-prescription drug availability | 2, Non-prescription drug use",,,,,,"[outcome_type(10)] = '1'",,,,,,
+impact_otc,data_extraction_form,,checkbox,"What is the impact of the policy on non-prescription drug use / availability?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_type(10)] = '1'",,,,,,
+outcome_other,data_extraction_form,,text,"What other outcome(s)?",,,,,,,"[outcome_type(999)] = '1'",,,,,,
+impact_other,data_extraction_form,,checkbox,"What is the impact of the policy on the other outcome(s)?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_type(999)] = '1'",,,,,,
+outcome_other_2,data_extraction_form,,text,"What other outcome(s)?",,,,,,,"[outcome_type(998)] = '1'",,,,,,
+impact_other_2,data_extraction_form,,checkbox,"What is the impact of the policy on the other outcome(s)?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_type(998)] = '1'",,,,,,
+outcome_other_3,data_extraction_form,,text,"What other outcome(s)?",,,,,,,"[outcome_type(997)] = '1'",,,,,,
+impact_other_3,data_extraction_form,,checkbox,"What is the impact of the policy on the other outcome(s)?
+","0, No change | 1, Increase | 2, Decrease | 3, Beneficial | 4, Detrimental | 999, Unclear impact",,,,,,"[outcome_type(997)] = '1'",,,,,,
+comments,data_extraction_form,,notes,"Any other comments?",,,,,,,,,,,,,
+reminder,data_extraction_form,,descriptive,"<b>Reminder to set form status to ""Unverified"" so Mina knows to check data extraction!</b>",,,,,,,,,,,,,
