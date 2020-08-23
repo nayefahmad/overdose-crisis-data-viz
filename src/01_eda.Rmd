@@ -1,0 +1,64 @@
+---
+title: "Overdose crisis data - EDA"
+author: "Nayef Ahmad"
+date: "8/22/2020"
+output: 
+  html_document: 
+    keep_md: yes
+    code_folding: hide
+    toc: true
+    toc_float:
+      collapsed: false
+    toc_folding: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# Libraries 
+```{r}
+library(tidyverse)
+library(here)
+```
+
+# Overview 
+
+
+
+# Data 
+```{r}
+df1_raw <- read_csv(here::here("data", "ScopingReviewOfOpioi-FinalResults_DATA_2020-07-06_1942.csv"))
+
+nrow(df1_raw)
+# str(df1_raw)
+names(df1_raw)
+```
+
+## Data wrangling
+```{r}
+df2_clean <- 
+    df1_raw %>% 
+    mutate(country_income_check = country_income___1 + 
+               country_income___2 + 
+               country_income___3 + 
+               country_income___4
+           )
+
+df2_clean %>% 
+    filter(country_yn == 1) %>% 
+    count(country_income_check)
+
+```
+
+
+# Counts 
+```{r}
+table(df1_raw$country_yn)
+df1_raw %>% count(country)
+```
+
+
+
+# Questions 
+1. 
