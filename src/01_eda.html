@@ -1593,7 +1593,304 @@ div.tocify {
 </div>
 
 
-<pre class="r"><code>library(tidyverse)</code></pre>
+<div id="libraries" class="section level1">
+<h1>Libraries</h1>
+<pre class="r"><code>library(tidyverse)
+library(here)</code></pre>
+</div>
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+</div>
+<div id="wide-data" class="section level1">
+<h1>Wide data</h1>
+<pre class="r"><code>df1_raw &lt;- read_csv(here::here(&quot;data&quot;, &quot;ScopingReviewOfOpioi-FinalResults_DATA_2020-07-06_1942.csv&quot;))
+
+nrow(df1_raw)</code></pre>
+<pre><code>## [1] 717</code></pre>
+<pre class="r"><code># str(df1_raw)
+names(df1_raw)</code></pre>
+<pre><code>##   [1] &quot;record_id&quot;                        &quot;redcap_event_name&quot;               
+##   [3] &quot;redcap_repeat_instrument&quot;         &quot;redcap_repeat_instance&quot;          
+##   [5] &quot;paper_type&quot;                       &quot;name&quot;                            
+##   [7] &quot;dv_name&quot;                          &quot;year_pub&quot;                        
+##   [9] &quot;country_yn&quot;                       &quot;country&quot;                         
+##  [11] &quot;country_income___1&quot;               &quot;country_income___2&quot;              
+##  [13] &quot;country_income___3&quot;               &quot;country_income___4&quot;              
+##  [15] &quot;country_region___1&quot;               &quot;country_region___2&quot;              
+##  [17] &quot;country_region___3&quot;               &quot;country_region___4&quot;              
+##  [19] &quot;country_region___5&quot;               &quot;country_region___6&quot;              
+##  [21] &quot;country_region___7&quot;               &quot;target_substance___a&quot;            
+##  [23] &quot;target_substance___b&quot;             &quot;target_substance___c&quot;            
+##  [25] &quot;target_substance___d&quot;             &quot;target_substance___e&quot;            
+##  [27] &quot;target_substance___f&quot;             &quot;population_specific___0&quot;         
+##  [29] &quot;population_specific___1&quot;          &quot;population_specific___2&quot;         
+##  [31] &quot;population_specific___3&quot;          &quot;population_specific___4&quot;         
+##  [33] &quot;population_specific___5&quot;          &quot;population_specific___6&quot;         
+##  [35] &quot;population_specific___7&quot;          &quot;population_specific___9&quot;         
+##  [37] &quot;population_specific___999&quot;        &quot;population_other&quot;                
+##  [39] &quot;population_specific_affect___0&quot;   &quot;population_specific_affect___1&quot;  
+##  [41] &quot;population_specific_affect___2&quot;   &quot;population_specific_affect___3&quot;  
+##  [43] &quot;population_specific_affect___4&quot;   &quot;population_specific_affect___5&quot;  
+##  [45] &quot;population_specific_affect___6&quot;   &quot;population_specific_affect___7&quot;  
+##  [47] &quot;population_specific_affect___9&quot;   &quot;population_specific_affect___999&quot;
+##  [49] &quot;population_other_2&quot;               &quot;competing_interests_yn&quot;          
+##  [51] &quot;competing_interests&quot;              &quot;empirical&quot;                       
+##  [53] &quot;year_study&quot;                       &quot;study_design___1&quot;                
+##  [55] &quot;study_design___2&quot;                 &quot;study_design___3&quot;                
+##  [57] &quot;study_design___4&quot;                 &quot;study_design___5&quot;                
+##  [59] &quot;study_design___7&quot;                 &quot;study_design___6&quot;                
+##  [61] &quot;study_design___8&quot;                 &quot;study_design___9&quot;                
+##  [63] &quot;study_design___10&quot;                &quot;study_design___999&quot;              
+##  [65] &quot;study_design_other&quot;               &quot;longitudinal_yn&quot;                 
+##  [67] &quot;data_sources___1&quot;                 &quot;data_sources___2&quot;                
+##  [69] &quot;data_sources___3&quot;                 &quot;data_sources___6&quot;                
+##  [71] &quot;data_sources___4&quot;                 &quot;data_sources___5&quot;                
+##  [73] &quot;data_sources___999&quot;               &quot;data_sources_other&quot;              
+##  [75] &quot;analysis___0&quot;                     &quot;analysis___1&quot;                    
+##  [77] &quot;analysis___2&quot;                     &quot;analysis___3&quot;                    
+##  [79] &quot;analysis___6&quot;                     &quot;analysis___4&quot;                    
+##  [81] &quot;analysis___5&quot;                     &quot;analysis___7&quot;                    
+##  [83] &quot;analysis___8&quot;                     &quot;analysis___999&quot;                  
+##  [85] &quot;analysis_other&quot;                   &quot;policy_type___1&quot;                 
+##  [87] &quot;policy_type___2&quot;                  &quot;policy_type___3&quot;                 
+##  [89] &quot;policy_type___4&quot;                  &quot;policy_type___5&quot;                 
+##  [91] &quot;policy_type___6&quot;                  &quot;policy_type___7&quot;                 
+##  [93] &quot;policy_type___8&quot;                  &quot;gov_level___1&quot;                   
+##  [95] &quot;gov_level___2&quot;                    &quot;gov_level___3&quot;                   
+##  [97] &quot;gov_level___4&quot;                    &quot;court_level___1&quot;                 
+##  [99] &quot;court_level___2&quot;                  &quot;court_level___3&quot;                 
+## [101] &quot;court_level___4&quot;                  &quot;court_level___5&quot;                 
+## [103] &quot;court_level___6&quot;                  &quot;appeal_yn&quot;                       
+## [105] &quot;policies___1&quot;                     &quot;policies___2&quot;                    
+## [107] &quot;policies___3&quot;                     &quot;policies___4&quot;                    
+## [109] &quot;policies___5&quot;                     &quot;policies___6&quot;                    
+## [111] &quot;policies___7&quot;                     &quot;policies___8&quot;                    
+## [113] &quot;policies___999&quot;                   &quot;policies___998&quot;                  
+## [115] &quot;policies___997&quot;                   &quot;policy_criminal___1&quot;             
+## [117] &quot;policy_criminal___2&quot;              &quot;policy_criminal___999&quot;           
+## [119] &quot;policy_criminal___998&quot;            &quot;policy_criminal___997&quot;           
+## [121] &quot;policy_criminal_other&quot;            &quot;policy_criminal_other_2&quot;         
+## [123] &quot;policy_criminal_other_3&quot;          &quot;policy_legislative___1&quot;          
+## [125] &quot;policy_legislative___2&quot;           &quot;policy_legislative___3&quot;          
+## [127] &quot;policy_legislative___4&quot;           &quot;policy_legislative___5&quot;          
+## [129] &quot;policy_legislative___999&quot;         &quot;policy_legislative___998&quot;        
+## [131] &quot;policy_legislative___997&quot;         &quot;policy_legislative_other&quot;        
+## [133] &quot;policy_legislative_other_2&quot;       &quot;policy_legislative_other_3&quot;      
+## [135] &quot;policy_law_enforce___1&quot;           &quot;policy_law_enforce___2&quot;          
+## [137] &quot;policy_law_enforce___999&quot;         &quot;policy_law_enforce___998&quot;        
+## [139] &quot;policy_law_enforce___997&quot;         &quot;policy_law_enforce_other&quot;        
+## [141] &quot;policy_law_enforce_other_2&quot;       &quot;policy_law_enforce_other_3&quot;      
+## [143] &quot;policy_harm___1&quot;                  &quot;policy_harm___3&quot;                 
+## [145] &quot;policy_harm___4&quot;                  &quot;policy_harm___5&quot;                 
+## [147] &quot;policy_harm___999&quot;                &quot;policy_harm___998&quot;               
+## [149] &quot;policy_harm___997&quot;                &quot;policy_harm_other&quot;               
+## [151] &quot;policy_harm_other_2&quot;              &quot;policy_harm_other_3&quot;             
+## [153] &quot;policy_prescription___1&quot;          &quot;policy_prescription___2&quot;         
+## [155] &quot;policy_prescription___3&quot;          &quot;policy_prescription___999&quot;       
+## [157] &quot;policy_prescription___998&quot;        &quot;policy_prescription___997&quot;       
+## [159] &quot;policy_prescription_other&quot;        &quot;policy_prescription_other_2&quot;     
+## [161] &quot;policy_prescription_other_3&quot;      &quot;policy_clinical___1&quot;             
+## [163] &quot;policy_clinical___2&quot;              &quot;policy_clinical___3&quot;             
+## [165] &quot;policy_clinical___4&quot;              &quot;policy_clinical___5&quot;             
+## [167] &quot;policy_clinical___6&quot;              &quot;policy_clinical___7&quot;             
+## [169] &quot;policy_clinical___999&quot;            &quot;policy_clinical___998&quot;           
+## [171] &quot;policy_clinical___997&quot;            &quot;policy_clinical_other&quot;           
+## [173] &quot;policy_clinical_other_2&quot;          &quot;policy_clinical_other_3&quot;         
+## [175] &quot;policy_social___1&quot;                &quot;policy_social___2&quot;               
+## [177] &quot;policy_social___3&quot;                &quot;policy_social___999&quot;             
+## [179] &quot;policy_social___998&quot;              &quot;policy_social___997&quot;             
+## [181] &quot;policy_social_other&quot;              &quot;policy_social_other_2&quot;           
+## [183] &quot;policy_social_other_3&quot;            &quot;policy_international___1&quot;        
+## [185] &quot;policy_international___999&quot;       &quot;policy_international___998&quot;      
+## [187] &quot;policy_international___997&quot;       &quot;policy_international_other&quot;      
+## [189] &quot;policy_international_other_2&quot;     &quot;policy_international_other_3&quot;    
+## [191] &quot;policy_theme_other&quot;               &quot;policy_theme_other_2&quot;            
+## [193] &quot;policy_theme_other_3&quot;             &quot;outcomes_yn&quot;                     
+## [195] &quot;outcome_type___1&quot;                 &quot;outcome_type___10&quot;               
+## [197] &quot;outcome_type___2&quot;                 &quot;outcome_type___3&quot;                
+## [199] &quot;outcome_type___4&quot;                 &quot;outcome_type___5&quot;                
+## [201] &quot;outcome_type___6&quot;                 &quot;outcome_type___7&quot;                
+## [203] &quot;outcome_type___8&quot;                 &quot;outcome_type___999&quot;              
+## [205] &quot;outcome_type___998&quot;               &quot;outcome_type___997&quot;              
+## [207] &quot;outcomes_prescription___1&quot;        &quot;outcomes_prescription___2&quot;       
+## [209] &quot;outcomes_prescription___3&quot;        &quot;outcomes_prescription___5&quot;       
+## [211] &quot;outcomes_prescription___999&quot;      &quot;outcomes_prescription___998&quot;     
+## [213] &quot;outcomes_prescription___997&quot;      &quot;outcomes_pres_other&quot;             
+## [215] &quot;outcomes_pres_other_2&quot;            &quot;outcomes_pres_other_3&quot;           
+## [217] &quot;impact_opr___0&quot;                   &quot;impact_opr___1&quot;                  
+## [219] &quot;impact_opr___2&quot;                   &quot;impact_opr___3&quot;                  
+## [221] &quot;impact_opr___4&quot;                   &quot;impact_opr___999&quot;                
+## [223] &quot;impact_opb___0&quot;                   &quot;impact_opb___1&quot;                  
+## [225] &quot;impact_opb___2&quot;                   &quot;impact_opb___3&quot;                  
+## [227] &quot;impact_opb___4&quot;                   &quot;impact_opb___999&quot;                
+## [229] &quot;impact_oa___0&quot;                    &quot;impact_oa___1&quot;                   
+## [231] &quot;impact_oa___2&quot;                    &quot;impact_oa___3&quot;                   
+## [233] &quot;impact_oa___4&quot;                    &quot;impact_oa___999&quot;                 
+## [235] &quot;impact_ou___0&quot;                    &quot;impact_ou___1&quot;                   
+## [237] &quot;impact_ou___2&quot;                    &quot;impact_ou___3&quot;                   
+## [239] &quot;impact_ou___4&quot;                    &quot;impact_ou___999&quot;                 
+## [241] &quot;impact_pres_other___0&quot;            &quot;impact_pres_other___1&quot;           
+## [243] &quot;impact_pres_other___2&quot;            &quot;impact_pres_other___3&quot;           
+## [245] &quot;impact_pres_other___4&quot;            &quot;impact_pres_other___999&quot;         
+## [247] &quot;outcomes_non_pres___1&quot;            &quot;outcomes_non_pres___2&quot;           
+## [249] &quot;outcomes_non_pres___999&quot;          &quot;outcomes_non_pres___998&quot;         
+## [251] &quot;outcomes_non_pres___997&quot;          &quot;outcome_non_pres_other&quot;          
+## [253] &quot;outcome_non_pres_other_2&quot;         &quot;outcome_non_pres_other_3&quot;        
+## [255] &quot;impact_non_pres_avail___0&quot;        &quot;impact_non_pres_avail___1&quot;       
+## [257] &quot;impact_non_pres_avail___2&quot;        &quot;impact_non_pres_avail___3&quot;       
+## [259] &quot;impact_non_pres_avail___4&quot;        &quot;impact_non_pres_avail___999&quot;     
+## [261] &quot;impact_non_pres_use___0&quot;          &quot;impact_non_pres_use___1&quot;         
+## [263] &quot;impact_non_pres_use___2&quot;          &quot;impact_non_pres_use___3&quot;         
+## [265] &quot;impact_non_pres_use___4&quot;          &quot;impact_non_pres_use___999&quot;       
+## [267] &quot;impact_non_pres_other___0&quot;        &quot;impact_non_pres_other___1&quot;       
+## [269] &quot;impact_non_pres_other___2&quot;        &quot;impact_non_pres_other___3&quot;       
+## [271] &quot;impact_non_pres_other___4&quot;        &quot;impact_non_pres_other___999&quot;     
+## [273] &quot;outcomes_treatment___1&quot;           &quot;outcomes_treatment___2&quot;          
+## [275] &quot;outcomes_treatment___999&quot;         &quot;outcomes_treatment___998&quot;        
+## [277] &quot;outcomes_treatment___997&quot;         &quot;outcomes_treatment_other&quot;        
+## [279] &quot;outcomes_treatment_other_2&quot;       &quot;outcomes_treatment_other_3&quot;      
+## [281] &quot;impact_access___0&quot;                &quot;impact_access___1&quot;               
+## [283] &quot;impact_access___2&quot;                &quot;impact_access___3&quot;               
+## [285] &quot;impact_access___4&quot;                &quot;impact_access___999&quot;             
+## [287] &quot;impact_tfo___0&quot;                   &quot;impact_tfo___1&quot;                  
+## [289] &quot;impact_tfo___2&quot;                   &quot;impact_tfo___3&quot;                  
+## [291] &quot;impact_tfo___4&quot;                   &quot;impact_tfo___999&quot;                
+## [293] &quot;impact_of___0&quot;                    &quot;impact_of___1&quot;                   
+## [295] &quot;impact_of___2&quot;                    &quot;impact_of___3&quot;                   
+## [297] &quot;impact_of___4&quot;                    &quot;impact_of___999&quot;                 
+## [299] &quot;impact_of_2___0&quot;                  &quot;impact_of_2___1&quot;                 
+## [301] &quot;impact_of_2___2&quot;                  &quot;impact_of_2___3&quot;                 
+## [303] &quot;impact_of_2___4&quot;                  &quot;impact_of_2___999&quot;               
+## [305] &quot;impact_of_3___0&quot;                  &quot;impact_of_3___1&quot;                 
+## [307] &quot;impact_of_3___2&quot;                  &quot;impact_of_3___3&quot;                 
+## [309] &quot;impact_of_3___4&quot;                  &quot;impact_of_3___999&quot;               
+## [311] &quot;impact_overdose___0&quot;              &quot;impact_overdose___1&quot;             
+## [313] &quot;impact_overdose___2&quot;              &quot;impact_overdose___3&quot;             
+## [315] &quot;impact_overdose___4&quot;              &quot;impact_overdose___999&quot;           
+## [317] &quot;impact_crim___0&quot;                  &quot;impact_crim___1&quot;                 
+## [319] &quot;impact_crim___2&quot;                  &quot;impact_crim___3&quot;                 
+## [321] &quot;impact_crim___4&quot;                  &quot;impact_crim___999&quot;               
+## [323] &quot;outcome_infectious___1&quot;           &quot;outcome_infectious___2&quot;          
+## [325] &quot;outcome_infectious___999&quot;         &quot;outcome_infectious___998&quot;        
+## [327] &quot;outcome_infectious___997&quot;         &quot;outcome_infectious_other&quot;        
+## [329] &quot;outcome_infectious_other_2&quot;       &quot;outcome_infectious_other_3&quot;      
+## [331] &quot;impact_hiv___0&quot;                   &quot;impact_hiv___1&quot;                  
+## [333] &quot;impact_hiv___2&quot;                   &quot;impact_hiv___3&quot;                  
+## [335] &quot;impact_hiv___4&quot;                   &quot;impact_hiv___999&quot;                
+## [337] &quot;impact_hepc___0&quot;                  &quot;impact_hepc___1&quot;                 
+## [339] &quot;impact_hepc___2&quot;                  &quot;impact_hepc___3&quot;                 
+## [341] &quot;impact_hepc___4&quot;                  &quot;impact_hepc___999&quot;               
+## [343] &quot;impact_infect_other___0&quot;          &quot;impact_infect_other___1&quot;         
+## [345] &quot;impact_infect_other___2&quot;          &quot;impact_infect_other___3&quot;         
+## [347] &quot;impact_infect_other___4&quot;          &quot;impact_infect_other___999&quot;       
+## [349] &quot;outcome_illegal___1&quot;              &quot;outcome_illegal___2&quot;             
+## [351] &quot;outcome_illegal___999&quot;            &quot;outcome_illegal___998&quot;           
+## [353] &quot;outcome_illegal___997&quot;            &quot;outcome_illegal_other&quot;           
+## [355] &quot;outcome_illegal_other_2&quot;          &quot;outcome_illegal_other_3&quot;         
+## [357] &quot;impact_idu___0&quot;                   &quot;impact_idu___1&quot;                  
+## [359] &quot;impact_idu___2&quot;                   &quot;impact_idu___3&quot;                  
+## [361] &quot;impact_idu___4&quot;                   &quot;impact_idu___999&quot;                
+## [363] &quot;impact_dui___0&quot;                   &quot;impact_dui___1&quot;                  
+## [365] &quot;impact_dui___2&quot;                   &quot;impact_dui___3&quot;                  
+## [367] &quot;impact_dui___4&quot;                   &quot;impact_dui___999&quot;                
+## [369] &quot;impact_dui_2___0&quot;                 &quot;impact_dui_2___1&quot;                
+## [371] &quot;impact_dui_2___2&quot;                 &quot;impact_dui_2___3&quot;                
+## [373] &quot;impact_dui_2___4&quot;                 &quot;impact_dui_2___999&quot;              
+## [375] &quot;impact_health___0&quot;                &quot;impact_health___1&quot;               
+## [377] &quot;impact_health___2&quot;                &quot;impact_health___3&quot;               
+## [379] &quot;impact_health___4&quot;                &quot;impact_health___999&quot;             
+## [381] &quot;impact_non_pres_avail_2___1&quot;      &quot;impact_non_pres_avail_2___2&quot;     
+## [383] &quot;impact_otc___0&quot;                   &quot;impact_otc___1&quot;                  
+## [385] &quot;impact_otc___2&quot;                   &quot;impact_otc___3&quot;                  
+## [387] &quot;impact_otc___4&quot;                   &quot;impact_otc___999&quot;                
+## [389] &quot;outcome_other&quot;                    &quot;impact_other___0&quot;                
+## [391] &quot;impact_other___1&quot;                 &quot;impact_other___2&quot;                
+## [393] &quot;impact_other___3&quot;                 &quot;impact_other___4&quot;                
+## [395] &quot;impact_other___999&quot;               &quot;outcome_other_2&quot;                 
+## [397] &quot;impact_other_2___0&quot;               &quot;impact_other_2___1&quot;              
+## [399] &quot;impact_other_2___2&quot;               &quot;impact_other_2___3&quot;              
+## [401] &quot;impact_other_2___4&quot;               &quot;impact_other_2___999&quot;            
+## [403] &quot;outcome_other_3&quot;                  &quot;impact_other_3___0&quot;              
+## [405] &quot;impact_other_3___1&quot;               &quot;impact_other_3___2&quot;              
+## [407] &quot;impact_other_3___3&quot;               &quot;impact_other_3___4&quot;              
+## [409] &quot;impact_other_3___999&quot;             &quot;comments&quot;                        
+## [411] &quot;data_extraction_form_complete&quot;</code></pre>
+<div id="data-wrangling" class="section level2">
+<h2>Data wrangling</h2>
+<pre class="r"><code>df2_clean &lt;- 
+    df1_raw %&gt;% 
+    mutate(country_income_check = country_income___1 + 
+               country_income___2 + 
+               country_income___3 + 
+               country_income___4
+           )
+
+df2_clean %&gt;% 
+    filter(country_yn == 1) %&gt;% 
+    count(country_income_check)</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   country_income_check     n
+##                  &lt;dbl&gt; &lt;int&gt;
+## 1                    1   640</code></pre>
+</div>
+<div id="counts" class="section level2">
+<h2>Counts</h2>
+<pre class="r"><code>table(df1_raw$country_yn)</code></pre>
+<pre><code>## 
+##   0   1 
+##  77 640</code></pre>
+<pre class="r"><code>df1_raw %&gt;% count(country)</code></pre>
+<pre><code>## # A tibble: 32 x 2
+##    country     n
+##      &lt;dbl&gt; &lt;int&gt;
+##  1       8    24
+##  2       9     1
+##  3      16     1
+##  4      30    37
+##  5      44     4
+##  6      50     1
+##  7      57     1
+##  8      58     6
+##  9      60     1
+## 10      61     1
+## # ... with 22 more rows</code></pre>
+</div>
+</div>
+<div id="long-data" class="section level1">
+<h1>Long data</h1>
+<pre class="r"><code>df3_long_raw_01 &lt;- read_csv(here(&quot;data&quot;,
+                                 &quot;outfile_policies_impacts_20200712.csv&quot;))
+
+df4_long_raw_02 &lt;- read_csv(here(&quot;data&quot;,
+                                 &quot;outfile_remaining_vars_2020_07_13.csv&quot;))
+
+names(df3_long_raw_01)</code></pre>
+<pre><code>##  [1] &quot;record_id&quot;           &quot;policy_type&quot;         &quot;policy_op&quot;          
+##  [4] &quot;policy_specific&quot;     &quot;policy_specific_new&quot; &quot;outcomes_yn&quot;        
+##  [7] &quot;out_op&quot;              &quot;out_specific&quot;        &quot;out_code&quot;           
+## [10] &quot;out_code_name&quot;       &quot;impact_var&quot;          &quot;other_outcome&quot;      
+## [13] &quot;impact&quot;</code></pre>
+<pre class="r"><code>names(df4_long_raw_02)</code></pre>
+<pre><code>##  [1] &quot;record_id&quot;                       &quot;redcap_event_name.factor&quot;       
+##  [3] &quot;redcap_repeat_instrument.factor&quot; &quot;redcap_repeat_instance&quot;         
+##  [5] &quot;paper_type.factor&quot;               &quot;name&quot;                           
+##  [7] &quot;dv_name&quot;                         &quot;year_pub&quot;                       
+##  [9] &quot;country_yn.factor&quot;               &quot;country.factor&quot;                 
+## [11] &quot;competing_interests_yn.factor&quot;   &quot;competing_interests.factor&quot;     
+## [13] &quot;empirical.factor&quot;                &quot;year_study&quot;                     
+## [15] &quot;appeal_yn.factor&quot;                &quot;comments&quot;                       
+## [17] &quot;data_extraction_form_complete&quot;   &quot;country_region&quot;                 
+## [19] &quot;target_substance&quot;                &quot;population_specific&quot;            
+## [21] &quot;population_specific_affect&quot;      &quot;study_design&quot;                   
+## [23] &quot;data_sources&quot;                    &quot;analysis&quot;                       
+## [25] &quot;country_income&quot;</code></pre>
+</div>
+<div id="questions" class="section level1">
+<h1>Questions</h1>
+<ol style="list-style-type: decimal">
+<li>What does 9090 represent in colnames?</li>
+</ol>
+</div>
 
 
 

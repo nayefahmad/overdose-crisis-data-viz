@@ -26,7 +26,7 @@ library(here)
 
 
 
-# Data 
+# Wide data 
 ```{r}
 df1_raw <- read_csv(here::here("data", "ScopingReviewOfOpioi-FinalResults_DATA_2020-07-06_1942.csv"))
 
@@ -52,13 +52,25 @@ df2_clean %>%
 ```
 
 
-# Counts 
+## Counts 
 ```{r}
 table(df1_raw$country_yn)
 df1_raw %>% count(country)
 ```
 
 
+# Long data 
+```{r}
+df3_long_raw_01 <- read_csv(here("data",
+                                 "outfile_policies_impacts_20200712.csv"))
+
+df4_long_raw_02 <- read_csv(here("data",
+                                 "outfile_remaining_vars_2020_07_13.csv"))
+
+names(df3_long_raw_01)
+names(df4_long_raw_02)
+```
+
 
 # Questions 
-1. 
+1. What does 9090 represent in colnames? 
