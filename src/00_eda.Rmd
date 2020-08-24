@@ -74,3 +74,5 @@ names(df4_long_raw_02)
 
 # Questions 
 1. What does 9090 represent in colnames? 
+
+1. Where is file "lookup_rd.csv"? 

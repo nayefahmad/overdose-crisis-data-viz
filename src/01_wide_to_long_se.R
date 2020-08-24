@@ -1,6 +1,8 @@
 library(tidyverse)
+library(here)
 
-data <- read_csv('ScopingReviewOfOpioi-FinalResults_DATA_2020-07-06_1942.csv')
+data <- read_csv(here("data", 
+                      "ScopingReviewOfOpioi-FinalResults_DATA_2020-07-06_1942.csv"))
 #check <- read_csv('ScopingReviewOfOpioi-FinalResults_DATA_2019-12-18_1354.csv')
 data <- data %>% mutate(year_pub = 
                           ifelse(year_pub %in% c("Unclear", "unclear"), NA, year_pub)
@@ -27,7 +29,7 @@ data <- data %>%
          "outcomes_prescription_other_2" = outcomes_pres_other_2, 
          "outcomes_prescription_other_3" = outcomes_pres_other_3)
 
-data_n <- data %>% mutate_at(11:411, as.character)
+data_n <- data %>% mutate_at(11:411, as.character)  # why not factor? 
 sapply(data_n, class)
 
 #rename variables, will need this later for pivot_longer function
@@ -46,8 +48,10 @@ test <- data_n %>%
 dchk <- colnames(test)
 dchk
 
+# colnames with "_other" in the middle (not end). These weren't replaced above. 
 lu <- dchk[str_detect(dchk, "_other")]
 lu
+
 ###collect the 'single' columsn to own subset
 single_cols <- test %>% select(1:18)
 
@@ -63,7 +67,7 @@ data_long <- test %>%
 #want to 'spread' this out but glitching because some of the 'key' variables have multiple codes. 
 
 
-lookup <-read_csv(file = "lookup_rd.csv") 
+lookup <-read_csv(file = "lookup_rd.csv")  # where is this file? 
 
 lookup_a <- lookup %>% select(-impact_var)
 
