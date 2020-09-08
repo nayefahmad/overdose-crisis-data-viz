@@ -11,28 +11,31 @@ data <- data %>% mutate(year_pub =
 table(data$paper_type)
 table(data$outcomes_yn)
 
+# test for NAs: 
 fix_domain <- data$record_id[is.na(data$paper_type)]
 fix_outcomes <- data$record_id[is.na(data$outcomes_yn)]
 fix_countries <- data$record_id[is.na(data$country_yn)]
 
+# todo: why? 
 data <- data %>% mutate(paper_type = ifelse(record_id %in% c("Mallatt_2019_2", "Sears_2019"), 1, paper_type), 
                         outcomes_yn = ifelse(record_id == "Minhee_2019", 0, outcomes_yn))
 
-####renameing the over teh counter variable - for some reason redcap coding it as an impact variable
+# renaming the over the counter variable - for some reason redcap coding it as an impact variable
 data <- data %>% 
-  rename("outcome_otc___1" = impact_non_pres_avail_2___1, 
-         "outcome_otc___2" = impact_non_pres_avail_2___2, 
-         "outcomes_non_pres_other" = outcome_non_pres_other, 
-         "outcomes_non_pres_other_2" = outcome_non_pres_other_2, 
-         "outcomes_non_pres_other_3" = outcome_non_pres_other_3, 
-         "outcomes_prescription_other" = outcomes_pres_other, 
-         "outcomes_prescription_other_2" = outcomes_pres_other_2, 
-         "outcomes_prescription_other_3" = outcomes_pres_other_3)
+  rename(outcome_otc___1 = impact_non_pres_avail_2___1, 
+         outcome_otc___2 = impact_non_pres_avail_2___2, 
+         outcomes_non_pres_other = outcome_non_pres_other, 
+         outcomes_non_pres_other_2 = outcome_non_pres_other_2, 
+         outcomes_non_pres_other_3 = outcome_non_pres_other_3, 
+         outcomes_prescription_other = outcomes_pres_other, 
+         outcomes_prescription_other_2 = outcomes_pres_other_2, 
+         outcomes_prescription_other_3 = outcomes_pres_other_3)
 
-data_n <- data %>% mutate_at(11:411, as.character)  # why not factor? 
+data_n <- data %>% mutate_at(11:411, as.character)  # todo: why not factor? 
 sapply(data_n, class)
 
-#rename variables, will need this later for pivot_longer function
+# rename variables ----
+# will need this later for pivot_longer function
 test <- data_n %>% 
   select(-longitudinal_yn) %>%
   rename_at(vars(ends_with("_other")), 
@@ -52,31 +55,48 @@ dchk
 lu <- dchk[str_detect(dchk, "_other")]
 lu
 
-###collect the 'single' columsn to own subset
+# collect the 'single' columns to own subset
 single_cols <- test %>% select(1:18)
 
 
-###need to gather multiple columns into multiple new colums - pivot_longer
+# pivot longer ---- 
+# need to gather multiple columns into multiple new colums - pivot_longer
+# this applies to everything after the first 18 cols 
 
+# quick demo:  
+# df <- data.frame(id = 1:3, 
+#                  country_income___1 = c(0, 0, 1), 
+#                  country_income___2 = c(1, 1, 0)); df
+# 
+# df %>% 
+#   pivot_longer(cols = country_income___1:country_income___2,
+#                names_to = c("variables", "code"),
+#                names_pattern = "(.*)___(.*)",  
+#                values_to = "out")
+
+# actual implementation: 
 data_long <- test %>% 
-  pivot_longer(cols = country_income___1:impact_other_3___999, 
+  pivot_longer(cols = country_income___1:impact_other_3___999,  # everything after the first 18 cols 
                names_to = c("variables", "code"),
-               values_to = "out", 
-               names_pattern = "(.*)___(.*)") %>% 
+               names_pattern = "(.*)___(.*)",  
+               values_to = "out") %>% 
   filter(out != 0)
-#want to 'spread' this out but glitching because some of the 'key' variables have multiple codes. 
+# todo: want to 'spread' this out but glitching because some of the 'key' variables have multiple codes. 
 
-
-lookup <-read_csv(file = "lookup_rd.csv")  # where is this file? 
-
+# import column lookup table ---- 
+lookup <-read_csv(file = here("data", "lookup_rd.csv"))  
 lookup_a <- lookup %>% select(-impact_var)
 
 data_long_code <- data_long %>% 
-  mutate(variable_merge = ifelse(str_detect(variables, pattern = "impact_"), "impact", variables)) %>% 
+  mutate(variable_merge = ifelse(str_detect(variables, pattern = "impact_"), 
+                                 "impact",
+                                 variables)) %>% 
   left_join(lookup_a, by = c("variable_merge", "code")) %>% 
-  mutate(code_name = ifelse(code %in% c("9090", "9090_2", "9090_3"), out, code_name))
+  mutate(code_name = ifelse(code %in% c("9090", "9090_2", "9090_3"), 
+                            out,
+                            code_name))
 
-dara_long_w2 <- data_long_code %>% 
+data_long_w2 <- data_long_code %>% 
   select(-c(variable_merge, out)) %>% 
   # filter(code != "999") %>% 
   unite(code_comb, c(code, code_name)) %>% 
@@ -85,7 +105,8 @@ dara_long_w2 <- data_long_code %>%
   mutate(row = row_number()) %>%
   tidyr::pivot_wider(names_from = variables, values_from = code_comb) %>%
   select(-row)
-##keep the unite 
+
+# keep the unite 
 summary <- data_long %>% 
   group_by(variables, code) %>% 
   summarise(total = n_distinct(record_id))
@@ -94,21 +115,23 @@ varaiables <- data_long %>%
   select(variables) %>% 
   unique()
 
-#write_csv(varaiables, path="variable_list.csv")
+# write_csv(varaiables, path="variable_list.csv")
 
-##Need policy_type_ in one column, policies_ in one column and policy_criminal:policy_theme_other_3 in one column
+# policy cols ---- 
+# Need policy_type_ in one column, policies_ in one column and 
+# policy_criminal:policy_theme_other_3 in one column
 
-policy_types <- dara_long_w2 %>% 
+policy_types <- data_long_w2 %>% 
   select(record_id, policy_type) %>% 
   unique() %>% 
   filter(!is.na(policy_type))
 
-specific_policy <- dara_long_w2 %>%  
+specific_policy <- data_long_w2 %>%  
   select(record_id, starts_with("policy")) %>% 
   select(-policy_type) %>% 
   unique()
 
-##some rows that are missign across all policy columns - remove them
+# some rows that are missing across all policy columns - remove them
 specific_policy$sum_missing <- apply(specific_policy, MARGIN = 1, function(x) sum(is.na(x)))
 
 specific_policy <- specific_policy %>% 
@@ -126,9 +149,11 @@ specifics_policy_f <- policy_types %>%
   left_join(specifics_long, by="record_id") %>% 
   arrange(record_id)
 
-####Outcomes
 
-specific_outcomes <- dara_long_w2 %>%  
+#**********************************************************************
+# Outcomes ---- 
+
+specific_outcomes <- data_long_w2 %>%  
   select(record_id, starts_with("outcome")) %>% 
   mutate(outcome_type = ifelse(outcome_type %in% c("999_other 1", "998_other 2", "997_other 3", "4_overdose rates", "5_criminal activity", "8_health and  social services systems costs"), outcome_type, NA)) %>% 
   #select(-outcome_type) %>% 
@@ -144,8 +169,8 @@ specifics_out_long <- specific_outcomes %>%
   mutate(out_op = ifelse(out_op == "outcome", "outcome_other", out_op)) %>% 
   arrange(record_id, out_specific)
 
-##can't filter out the 999,997 and 998 bc they are needed to link to the impact
-other_out_only <- dara_long_w2 %>%  select(record_id, outcome_type, outcome)
+# can't filter out the 999,997 and 998 bc they are needed to link to the impact
+other_out_only <- data_long_w2 %>%  select(record_id, outcome_type, outcome)
 other_ids <- unique(other_out_only$record_id[str_detect(other_out_only$outcome_type, "other")])
 
 other_out_onlyb <- other_out_only %>% 
@@ -179,7 +204,8 @@ combo_sub <- a_sub %>% left_join(b_sub, by = c("record_id", "out_op", "merge_cod
 
 other_out_onlyc <- bind_rows(other_out_onlyb, combo_sub)
 specifics_out_long <- filter(specifics_out_long, !(str_detect(out_specific, "9090")))
-##create combo var in teh lookup
+
+# create combo var in the lookup
 lookup_b <- lookup %>% rename(out_op = variable_merge) %>% 
   unite(out_specific, c(code, code_name), remove = FALSE)#%>% select(out_op, out_specific, impact_var)
 
@@ -191,7 +217,7 @@ specifics_policy_out_f <- specifics_policy_f %>%
   mutate(outcomes_yn = ifelse(is.na(outcomes_yn), "0", outcomes_yn)) %>% 
   left_join(lookup_b, by = c("out_op", "out_specific"))
 
-specific_impact <- dara_long_w2 %>%  
+specific_impact <- data_long_w2 %>%  
   select(record_id, starts_with("impact")) %>% 
   unique() %>% 
   pivot_longer(2:ncol(.), names_to = "impact_var", 
@@ -206,7 +232,10 @@ final <- specifics_policy_out_f %>%
 
 final_mod <- final %>%  
   mutate(out_specific = ifelse(!is.na(other_outcome), other_outcome, out_specific))
-###############Some of the other policies should be reclassified, if we correct the policy we also need to correct the policy option.
+
+
+# Some of the other policies should be reclassified, if we correct the policy 
+# we also need to correct the policy option.
 
 final_mod_cor_policy<- final_mod %>% 
   mutate(policy_op = ifelse(str_detect(policy_specific, regex("9090_prior_authorization", ignore_case = T)), "policy_social",
