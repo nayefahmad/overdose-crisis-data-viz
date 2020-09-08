@@ -1,4 +1,4 @@
-analy_pop <- dara_long_w2 %>% 
+analy_pop <- data_long_w2 %>% 
   select(-c(starts_with("policy"), starts_with("outcome"), starts_with("impact"), gov_level, court_level)) %>% 
   unique() %>% 
   ungroup()

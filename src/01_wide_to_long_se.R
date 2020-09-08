@@ -84,7 +84,7 @@ data_long <- test %>%
 # todo: want to 'spread' this out but glitching because some of the 'key' variables have multiple codes. 
 
 # import column lookup table ---- 
-lookup <-read_csv(file = here("data", "lookup_rd.csv"))  
+lookup <- read_csv(file = here("data", "lookup_rd.csv"))  
 lookup_a <- lookup %>% select(-impact_var)
 
 data_long_code <- data_long %>% 
