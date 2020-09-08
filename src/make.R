@@ -12,10 +12,13 @@ plan <- drake_plan(
     lookup_b = lookup %>% rename(out_op = variable_merge) %>% 
         unite(out_specific, c(code, code_name), remove = FALSE), 
     clean_data = raw_data %>% get_clean_data(),
-    clean_data_file = write_csv(clean_data, file_out("dst/clean_data.csv")),
     data_long = get_data_long(clean_data),
     data_long_code = get_data_long_code(data_long, lookup_a), 
-    data_long_w2 = get_data_long_w2(data_long_code)
+    data_long_w2 = get_data_long_w2(data_long_code), 
+    
+    # write outputs: 
+    clean_data_file = write_csv(clean_data, file_out("dst/clean_data.csv")),
+    data_long_w2_file = write_csv(data_long_w2, file_out("dst/data_long_w2.csv"))
 )
 
 make(plan)
