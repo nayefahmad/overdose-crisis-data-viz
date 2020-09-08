@@ -74,13 +74,17 @@ get_data_long_code <- function(data_long, lookup_a){
 get_data_long_w2 <- function(data_long_code){
     data_long_w2 <- data_long_code %>% 
         select(-c(variable_merge, out)) %>% 
-        filter(code != "999") %>%
+        # filter(code != "999") %>%
         unite(code_comb, c(code, code_name)) %>%
         group_by(record_id, variables) %>%
         arrange(record_id) %>%
         mutate(row = row_number()) %>%
-        pivot_wider(names_from = variables, values_from = code_comb) %>%
-        select(-row)
+        pivot_wider(names_from = variables, 
+                    values_from = code_comb) %>% 
+        
+        ungroup() %>% 
+        group_by(record_id) %>% 
+        fill(country_income:policy_international)
     
     return(data_long_w2)
 }
