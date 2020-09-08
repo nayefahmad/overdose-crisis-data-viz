@@ -1,0 +1,183 @@
+variable_merge,code ,code_name,impact_var
+analysis,0,descriptive,
+analysis,1,hypothesis testing,
+analysis,2,estimates of rates,
+analysis,3,modelling,
+analysis,4,comparative,
+analysis,5,longitudinal,
+analysis,6,estimates of risk,
+analysis,7,simulation,
+analysis,8,qualitative ,
+analysis,999,other,
+country_income,1,High Income,
+country_income,2,Upper- middle income,
+country_income,3,Lower-middle income,
+country_income,4,Low income,
+country_region,1,East Asia & Pacific,
+country_region,2,Europe & Central Asia ,
+country_region,3,Latin America,
+country_region,4,Middle East and North Africa,
+country_region,5,North America,
+country_region,6,South Asia,
+country_region,7,Sub-Saharan Africa,
+data_sources,1,adminstrative data,
+data_sources,2,qualitative ,
+data_sources,3,survey,
+data_sources,4,census,
+data_sources,5,chart reviews/medical records,
+data_sources,6,other studies,
+data_sources,999,other,
+impact,0,no change,
+impact,1,increase,
+impact,2,decrease ,
+impact,3,beneficial,
+impact,4,detrimental,
+impact,999,unclear,
+outcome_illegal,1,injection drug use,impact_idu
+outcome_illegal,2,drug use related injuries,impact_dui
+outcome_illegal,999,other 1 ,impact_dui_2
+outcome_illegal,998,other 2,impact_dui_2
+outcome_illegal,997,other 3,impact_dui_2
+outcome_type,1,prescription drug availability/use,
+outcome_type,2,illegal drug availability / use,
+outcome_type,3,substance use treatment,
+outcome_type,4,overdose rates,impact_overdose
+outcome_type,5,criminal activity,impact_crim
+outcome_type,6,infectious disease rates,
+outcome_type,7,illegal drug use behaviours/harms,
+outcome_type,8,health and  social services systems costs,impact_health
+outcome_type,999,other 1 ,impact_other
+outcome_type,998,other 2 ,impact_other_2
+outcome_type,997,other 3,impact_other_3
+outcome_type,10,non prescription drug availability / use,
+outcome_infectious,1,HIV,impact_hiv
+outcome_infectious,2,HepC,impact_hepc
+outcome_infectious,999,other 1 ,impact_infect_other
+outcome_infectious,998,other 2,impact_infect_other
+outcome_infectious,997,other 3,impact_infect_other
+outcome_otc,1,non-prescription drug availability,impact_otc
+outcome_otc,2,non-prescription drug use,impact_otc
+outcomes_non_pres,1,illegal drug availability,impact_non_pres_avail
+outcomes_non_pres,2,illegal drug use,impact_non_pres_use
+outcomes_non_pres,999,other 1 ,impact_non_pres_other
+outcomes_non_pres,998,other 2,impact_non_pres_other
+outcomes_non_pres,997,other 3,impact_non_pres_other
+outcomes_prescription,1,opioid prescribing rates,impact_opr
+outcomes_prescription,2,opioid prescribing behaviours,impact_opb
+outcomes_prescription,3,opioid availability ,impact_oa
+outcomes_prescription,5,opioid prescription fills,impact_ou
+outcomes_prescription,999,other 1,impact_pres_other
+outcomes_prescription,998,other 2,impact_pres_other
+outcomes_prescription,997,other 3,impact_pres_other
+outcomes_treatment,1,access,impact_access
+outcomes_treatment,2,oat ,impact_tfo
+outcomes_treatment,999, other 1 ,impact_of
+outcomes_treatment,998,other 2,impact_of_2
+outcomes_treatment,997,other 3,impact_of_3
+policies,1,criminal justice,
+policies,2,legislative,
+policies,3,law enforcement,
+policies,4,harm reduction,
+policies,5,prescription drug regulations,
+policies,6,clinical treatments,
+policies,7,social services,
+policies,8,interational,
+policies,999,other - 1,
+policies,998,other - 2 ,
+policies,997,other - 3,
+policy_clinical,1,availability of OAT ,
+policy_clinical,2,availability of OAT - provider - doctors,
+policy_clinical,3,availability of OAT - provider - pharmacists,
+policy_clinical,4,opioid prescribing standards,
+policy_clinical,5,opioid prescribing standards - provider - doctor,
+policy_clinical,6,opioid prescribing standards - provider - pharmacist,
+policy_clinical,7,compulsory treatment,
+policy_clinical,999,other 1 ,
+policy_clinical,998,other 2,
+policy_clinical,997,other 3,
+policy_criminal,1,drug courts,
+policy_criminal,2,punitive charges ,
+policy_criminal,999,other 1 ,
+policy_criminal,998,other 2,
+policy_criminal,997,other 3,
+policy_harm,1,needle exchange/availability,
+policy_harm,3,SIS,
+policy_harm,4,OPS,
+policy_harm,5,drug testing,
+policy_harm,999,other 1 ,
+policy_harm,998,other 2 ,
+policy_harm,997,other 3,
+policy_international,1,international drug treaties,
+policy_international,999,other 1 ,
+policy_international,998,other 2,
+policy_international,997,other 3,
+policy_law_enforce,1,policing tactics,
+policy_law_enforce,2,police presence,
+policy_law_enforce,999,other 1 ,
+policy_law_enforce,998,other 2 ,
+policy_law_enforce,997,other 3,
+policy_legislative,1,regulation of prescription drugs,
+policy_legislative,2,illicit drug policies,
+policy_legislative,3,decriminalization,
+policy_legislative,4,legalization,
+policy_legislative,5,first responders,
+policy_legislative,999,other 1,
+policy_legislative,998,other 2,
+policy_legislative,997,other 3,
+policy_prescription,1,drug rescheduling,
+policy_prescription,2,changes in drug formulation,
+policy_prescription,3,withdraw drug ,
+policy_prescription,999,other 1 ,
+policy_prescription,998,other 2 ,
+policy_prescription,997,other 3,
+policy_social,1,welfare expansion/reform,
+policy_social,2,medical insurance changes,
+policy_social,3,restrictions,
+policy_social,999,other 1 ,
+policy_social,998,other 2 ,
+policy_social,997,other 3,
+policy_type,1,legal ,
+policy_type,2,legislations,
+policy_type,3,regulation,
+policy_type,4,government policy,
+policy_type,5,guidelines,
+policy_type,6,standards,
+policy_type,7,programs,
+policy_type,8,strategies,
+population_specific,0,general pop,
+population_specific,1,people who use illegal drugs,
+population_specific,2,clinical practitioners,
+population_specific,3,women,
+population_specific,4,youth,
+population_specific,5,indgenous,
+population_specific,6,people who have been incarcerated,
+population_specific,7,chronic opioid users,
+population_specific,9,people with chronic pain,
+population_specific,999,other,
+population_specific_affect,0,general pop,
+population_specific_affect,1,people who use illegal drugs,
+population_specific_affect,2,clinical practitioners,
+population_specific_affect,3,women,
+population_specific_affect,4,youth,
+population_specific_affect,5,indgenous,
+population_specific_affect,6,people who have been incarcerated,
+population_specific_affect,7,chronic opioid users,
+population_specific_affect,9,people with chronic pain,
+population_specific_affect,999,other,
+study_design,1,systematic review,
+study_design,2,scoping review,
+study_design,3,rct,
+study_design,4,cohort study,
+study_design,5,cross sectional,
+study_design,6,ecological,
+study_design,7,ecological time series,
+study_design,8,ecological geographic ,
+study_design,9,case study,
+study_design,10,case series,
+study_design,999,other,
+target_substance,a,opioids,
+target_substance,b,cannabis,
+target_substance,c,meth,
+target_substance,d,cocaine,
+target_substance,e,benzo,
+target_substance,f,other,
