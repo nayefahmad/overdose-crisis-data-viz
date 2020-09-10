@@ -90,3 +90,44 @@ get_data_long_w2 <- function(data_long_code){
 }
 
 
+get_policy_types <- function(data_long_w2){
+    policy_types <- data_long_w2 %>% 
+        select(record_id, policy_type) %>% 
+        unique() %>% 
+        filter(!is.na(policy_type))
+    return(policy_types)
+    
+}
+
+
+get_specifics_policy_f <- function(data_long_w2, policy_types){
+    pecific_policy <- data_long_w2 %>%  
+        select(record_id, starts_with("policy")) %>% 
+        select(-policy_type) %>% 
+        unique()
+    
+    # some rows that are missing across all policy columns - remove them
+    specific_policy$sum_missing <- apply(specific_policy, 
+                                         MARGIN = 1,
+                                         function(x) sum(is.na(x)))
+    
+    specific_policy <- specific_policy %>% 
+        filter(sum_missing != 10) %>% 
+        select(-sum_missing)
+    
+    specifics_long <- specific_policy %>% 
+        group_by(record_id) %>% 
+        tidyr::gather(policy_op, policy_specific, starts_with("policy")) %>% 
+        filter(!is.na(policy_specific)) %>% 
+        filter(!str_detect(policy_specific, "999|998|997")) %>% 
+        arrange(record_id)
+    
+    specifics_policy_f <- policy_types %>% 
+        left_join(specifics_long, by="record_id") %>% 
+        arrange(record_id)
+    
+    return(specifics_policy_f)
+}
+
+
+

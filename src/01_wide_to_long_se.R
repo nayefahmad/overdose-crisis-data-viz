@@ -132,7 +132,9 @@ specific_policy <- data_long_w2 %>%
   unique()
 
 # some rows that are missing across all policy columns - remove them
-specific_policy$sum_missing <- apply(specific_policy, MARGIN = 1, function(x) sum(is.na(x)))
+specific_policy$sum_missing <- apply(specific_policy, 
+                                     MARGIN = 1,
+                                     function(x) sum(is.na(x)))
 
 specific_policy <- specific_policy %>% 
   filter(sum_missing != 10) %>% 
@@ -140,7 +142,7 @@ specific_policy <- specific_policy %>%
 
 specifics_long <- specific_policy %>% 
   group_by(record_id) %>% 
-  gather(policy_op, policy_specific, starts_with("policy")) %>% 
+  tidyr::gather(policy_op, policy_specific, starts_with("policy")) %>% 
   filter(!is.na(policy_specific)) %>% 
   filter(!str_detect(policy_specific, "999|998|997")) %>% 
   arrange(record_id)
