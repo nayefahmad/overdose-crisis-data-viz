@@ -17,6 +17,9 @@ data_long = get_data_long(clean_data)
 data_long_code = get_data_long_code(data_long, lookup_a)
 data_long_w2 = get_data_long_w2(data_long_code)
 
+policy_types = get_policy_types(data_long_w2)
+specifics_policy_f = get_specifics_policy_f(data_long_w2, policy_types)
+
 
 
 

@@ -142,7 +142,9 @@ specific_policy <- specific_policy %>%
 
 specifics_long <- specific_policy %>% 
   group_by(record_id) %>% 
-  tidyr::gather(policy_op, policy_specific, starts_with("policy")) %>% 
+  tidyr::gather(key = policy_op, 
+                value = policy_specific, 
+                starts_with("policy")) %>% 
   filter(!is.na(policy_specific)) %>% 
   filter(!str_detect(policy_specific, "999|998|997")) %>% 
   arrange(record_id)
@@ -163,7 +165,7 @@ specific_outcomes <- data_long_w2 %>%
 
 specifics_out_long <- specific_outcomes %>% 
   group_by(record_id, outcomes_yn) %>% 
-  gather(out_op, out_specific, 3:ncol(specific_outcomes)) %>% 
+  tidyr::gather(out_op, out_specific, 3:ncol(specific_outcomes)) %>% 
   filter(!is.na(out_specific)) %>% #filter out missing
   #filter(!(str_detect(out_specific, "9090") & out_op == "outcome")) %>% 
   #filter(!str_detect(out_specific, "998|999|997")) %>% 
@@ -194,7 +196,7 @@ other_out_sub <- specifics_out_long %>%
                                                            ifelse(str_detect(out_specific, "999|998|997"), NA, 
                                                                   999))))
 
-a_sub <-other_out_sub %>% filter(is.na(merge_code)) %>% 
+a_sub <- other_out_sub %>% filter(is.na(merge_code)) %>% 
   mutate(merge_code = as.numeric(substr(out_specific, 1, 3)))
 
 b_sub <- other_out_sub %>%  filter(!is.na(merge_code)) %>% 
