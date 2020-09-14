@@ -101,7 +101,7 @@ get_policy_types <- function(data_long_w2){
 
 
 get_specifics_policy_f <- function(data_long_w2, policy_types){
-    pecific_policy <- data_long_w2 %>%  
+    specific_policy <- data_long_w2 %>%  
         select(record_id, starts_with("policy")) %>% 
         select(-policy_type) %>% 
         unique()
@@ -130,4 +130,150 @@ get_specifics_policy_f <- function(data_long_w2, policy_types){
 }
 
 
+get_other_out_onlyb <- function(data_long_w2) {
+
+    other_out_only <- 
+        data_long_w2 %>% 
+        select(record_id, outcome_type, outcome)
+    
+    other_ids <- unique(other_out_only$record_id[str_detect(other_out_only$outcome_type, "other")])
+    
+    other_out_onlyb <- other_out_only %>% 
+        filter(record_id %in% other_ids) %>% 
+        mutate(outcome_type = ifelse(str_detect(outcome_type, "other"), outcome_type, NA)) %>% 
+        drop_na() %>% 
+        
+        # nest(data=c(outcome_type, outcome)) %>% 
+        # mutate(data = map(data, ~ map_dfc(., na.omit))) %>% 
+        # unnest(cols=c(data)) %>% 
+        
+        rename(other_outcome = outcome, 
+               out_specific = outcome_type) %>% 
+        mutate(out_op = "outcome_type") 
+    
+    return(other_out_onlyb)
+}
+
+
+get_specifics_out_long <- function(data_long_w2) {
+    specific_outcomes <- data_long_w2 %>%  
+        select(record_id, starts_with("outcome")) %>% 
+        mutate(outcome_type = ifelse(outcome_type %in% c("999_other 1", "998_other 2", "997_other 3", "4_overdose rates", "5_criminal activity", "8_health and  social services systems costs"), outcome_type, NA)) %>% 
+        #select(-outcome_type) %>% 
+        unique()
+    
+    specifics_out_long <- specific_outcomes %>% 
+        group_by(record_id, outcomes_yn) %>% 
+        tidyr::gather(key = out_op, 
+                      value = out_specific, 
+                      3:ncol(specific_outcomes)) %>% 
+        filter(!is.na(out_specific)) %>% #filter out missing
+        #filter(!(str_detect(out_specific, "9090") & out_op == "outcome")) %>% 
+        #filter(!str_detect(out_specific, "998|999|997")) %>% 
+        #filter(!str_detect(out_specific, "997")) %>% 
+        mutate(out_op = ifelse(out_op == "outcome", "outcome_other", out_op)) %>% 
+        arrange(record_id, out_specific) %>% 
+        filter(!(str_detect(out_specific, "9090")))
+    
+    return(specifics_out_long)
+    
+}
+
+
+get_other_out_sub <- function(specifics_out_long) {
+    other_out_sub <- specifics_out_long %>% 
+        ungroup() %>% 
+        filter(str_detect(out_specific, "9090|999|997|998") & out_op != "outcome_type") %>% 
+        select(-outcomes_yn) %>% 
+        #group_by(record_id, out_op) %>% 
+        arrange(record_id) %>% 
+        mutate(merge_code = ifelse(str_detect(out_specific, "9090_2"), 998, 
+                                   ifelse(str_detect(out_specific, "9090_3"), 997, 
+                                          ifelse(str_detect(out_specific, "999|998|997"), NA, 
+                                                 999)
+                                   )
+        )
+        )
+    return(other_out_sub)
+    
+}
+
+
+get_other_out_onlyc <- function(other_out_sub, other_out_onlyb) {
+    a_sub <- other_out_sub %>% 
+        filter(is.na(merge_code)) %>% 
+        mutate(merge_code = as.numeric(substr(out_specific, 1, 3)))
+    
+    b_sub <- other_out_sub %>%
+        filter(!is.na(merge_code)) %>% 
+        rename(other_outcome = out_specific)
+    
+    combo_sub <- a_sub %>% 
+        left_join(b_sub, by = c("record_id", "out_op", "merge_code")) %>% 
+        select(-merge_code)
+    
+    other_out_onlyc <- bind_rows(other_out_onlyb, combo_sub)
+    
+    return(other_out_onlyc)
+}
+
+
+get_final_mod_cor_policy <- function(specifics_policy_f, 
+                                     data_long_w2, 
+                                     specifics_out_long, 
+                                     lookup_b, 
+                                     other_out_onlyc) {
+    
+    specifics_policy_out_f <- specifics_policy_f %>% 
+        left_join(specifics_out_long, by = "record_id") %>% 
+        mutate(outcomes_yn = ifelse(is.na(outcomes_yn), "0", outcomes_yn)) %>% 
+        left_join(lookup_b, by = c("out_op", "out_specific"))
+    
+    specific_impact <- data_long_w2 %>%  
+        select(record_id, starts_with("impact")) %>% 
+        unique() %>% 
+        pivot_longer(2:ncol(.), names_to = "impact_var", 
+                     values_to = "impact", 
+                     values_drop_na = T 
+        )
+    
+    final <- specifics_policy_out_f %>% 
+        left_join(other_out_onlyc, by=c("record_id", "out_op", "out_specific")) %>% 
+        left_join(specific_impact, by = c("record_id", "impact_var")) %>% 
+        rename(out_code = code, out_code_name = code_name)
+    
+    final_mod <- final %>%  
+        mutate(out_specific = ifelse(!is.na(other_outcome), other_outcome, out_specific))
+    
+    final_mod_cor_policy<- final_mod %>% 
+        mutate(policy_op = ifelse(str_detect(policy_specific, regex("9090_prior_authorization", ignore_case = T)), "policy_social",
+                                  ifelse(str_detect(policy_specific, regex("9090_medicaid", ignore_case = T)), "policy_social", 
+                                         ifelse(str_detect(policy_specific, regex("9090_naloxone|9090_2_naloxone|9090_mandated co-prescriptions of naloxone|nalxone|take home naloxone|take home nalaxone|prescription of naloxone|9090_access to naloxone", ignore_case = T)), "policy_harm", 
+                                                ifelse(str_detect(policy_specific, regex("9090_bill 123", ignore_case=T)), "policy_clinical", 
+                                                       ifelse(str_detect(policy_specific, regex("9090_bill 123", ignore_case=T)), "policy_clinical", 
+                                                              ifelse(str_detect(policy_specific, regex("9090_involuntary treatment", ignore_case=T)), "policy_clinical", 
+                                                                     ifelse(str_detect(policy_specific, regex("prescription heroin|heroin prescription|heroine-assisted treatment|9090_HAT", ignore_case=T)), "policy_clinical", policy_op))))))), 
+               policy_specific = ifelse(str_detect(policy_specific, regex("9090_prior authorization", ignore_case = T)), "2_medical insurance changes",
+                                        ifelse(str_detect(policy_specific, regex("9090_medicaid", ignore_case = T)), "2_medical insurance changes", 
+                                               ifelse(str_detect(policy_specific, regex("9090_involuntary treatment", ignore_case=T)), "7_compulsory_treatment",
+                                                      ifelse(str_detect(policy_specific, regex("9090_bill 123", ignore_case=T)), "7_compulsory_treatment", policy_specific))))) %>% 
+        mutate(policy_specific_new = ifelse(str_detect(policy_specific, regex("9090_naloxone|9090_2_naloxone|9090_mandated co-prescriptions of naloxone|nalxone|take home naloxone|take home nalaxone|prescription of naloxone|9090_access to naloxone", ignore_case = T)), "9090_naloxone_access_policies", 
+                                            ifelse(str_detect(policy_specific, regex("pregnant|prenatal|pregnancy|prenanacy", ignore_case = T)), "9090_pregnancy_related_drug_charges", 
+                                                   ifelse(str_detect(policy_specific, regex("9090_diversion", ignore_case = T)), "9090_diversion", 
+                                                          ifelse(str_detect(policy_specific, regex("services available on release from corrections|pre-release (from prison) counselling", ignore_case = T)), "9090_release_from_prison_services",
+                                                                 ifelse(str_detect(policy_specific, regex("prescription heroin|heroin prescription|heroine-assisted treatment|9090_HAT", ignore_case=T)), "9090_prescription_heroin",
+                                                                        ifelse(str_detect(policy_specific, regex("ER/LA|risk evaluation and mitigation|REMS", ignore_case = T)), "9090_ER/LA Risk Evaluation and Mitigation Strategy", policy_specific))))
+                                            ))) %>% 
+        
+        select(record_id, 
+               policy_type, 
+               policy_op, 
+               policy_specific, 
+               policy_specific_new, 
+               everything())
+    
+    return(final_mod_cor_policy)
+    
+    
+}
 

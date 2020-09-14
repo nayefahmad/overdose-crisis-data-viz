@@ -1,6 +1,7 @@
 
 library(tidyverse)
 library(here)
+library(drake)
 
 source(here("src", "functions.R"))
 
@@ -20,6 +21,15 @@ data_long_w2 = get_data_long_w2(data_long_code)
 policy_types = get_policy_types(data_long_w2)
 specifics_policy_f = get_specifics_policy_f(data_long_w2, policy_types)
 
+other_out_onlyb = get_other_out_onlyb(data_long_w2)
+specifics_out_long = get_specifics_out_long(data_long_w2)
+other_out_sub = get_other_out_sub(specifics_out_long)
+other_out_onlyc = get_other_out_onlyc(other_out_sub)
+final_mod_cor_policy = get_final_mod_cor_policy(specifics_policy_f, 
+                                                data_long_w2, 
+                                                specifics_out_long, 
+                                                lookup_b, 
+                                                other_out_onlyc)
 
 
 
