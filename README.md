@@ -13,3 +13,4 @@ The project is based on the work of a research team led by Dr. Jane Buxton, Prof
     1. Refactoring code, setting up git repo with file imports  
     1. Summarize data processing in modular functions 
     1. Set up Drake for automation and reproducibility 
+    1. Todo: write high level summary of motivation behind each step 
