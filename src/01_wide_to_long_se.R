@@ -283,13 +283,18 @@ final_mod_cor_policy<- final_mod %>%
 
 
 # "Remaining variables" ---- 
+# this part was copied over from file 01b_remaining_variables.R
 analy_pop <- data_long_w2 %>% 
-  select(-c(starts_with("policy"), starts_with("outcome"), starts_with("impact"), gov_level, court_level)) %>% 
+  select(-c(starts_with("policy"), 
+            starts_with("outcome"),
+            starts_with("impact"),
+            gov_level, 
+            court_level)) %>% 
   unique() %>% 
   ungroup()
 
 
-#poach redcaps code to assign values
+# poach redcaps code to assign values
 analy_pop$redcap_event_name.factor = factor(analy_pop$redcap_event_name,levels=c("data_extraction_arm_1","pilot_arm_1"))
 analy_pop$redcap_repeat_instrument.factor = factor(analy_pop$redcap_repeat_instrument,levels=c("data_extraction_form"))
 analy_pop$paper_type.factor = factor(analy_pop$paper_type,levels=c("1","2","3"))
@@ -316,4 +321,28 @@ levels(analy_pop$competing_interests.factor)=c("Yes","No","Unclear")
 
 analy_pop_f <- analy_pop %>% 
   mutate_all(as.character) %>% 
-  select(record_id, redcap_event_name.factor, redcap_repeat_instrument.factor, redcap_repeat_instance, paper_type.factor, name, dv_name, year_pub, country_yn.factor, country.factor, competing_interests_yn.factor, competing_interests.factor, empirical.factor, year_study, appeal_yn.factor, comments, data_extraction_form_complete, country_income, country_region, target_substance, population_specific, population_specific_affect, study_design, data_sources, analysis)
+  select(record_id, 
+         redcap_event_name.factor, 
+         redcap_repeat_instrument.factor, 
+         redcap_repeat_instance, 
+         paper_type.factor, 
+         name, 
+         dv_name, 
+         year_pub, 
+         country_yn.factor, 
+         country.factor, 
+         competing_interests_yn.factor, 
+         competing_interests.factor, 
+         empirical.factor, 
+         year_study, 
+         appeal_yn.factor, 
+         comments, 
+         data_extraction_form_complete, 
+         country_income, 
+         country_region, 
+         target_substance, 
+         population_specific, 
+         population_specific_affect, 
+         study_design, 
+         data_sources, 
+         analysis)

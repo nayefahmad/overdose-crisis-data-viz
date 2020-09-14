@@ -31,11 +31,13 @@ plan <- drake_plan(
                                                     specifics_out_long, 
                                                     lookup_b, 
                                                     other_out_onlyc), 
+    analy_pop_f = get_analy_pop_f(data_long_w2),
     
     # write outputs: 
     clean_data_file = write_csv(clean_data, file_out("dst/clean_data.csv")),
     data_long_w2_file = write_csv(data_long_w2, file_out("dst/data_long_w2.csv")), 
-    final_mod_cor_policy_file = write_csv(final_mod_cor_policy, file_out("dst/final_mod_cor_policy.csv"))
+    final_mod_cor_policy_file = write_csv(final_mod_cor_policy, file_out("dst/final_mod_cor_policy.csv")), 
+    analy_pop_f_file = write_csv(analy_pop_f, file_out("dst/analy_pop_f.csv"))
     
 )
 
