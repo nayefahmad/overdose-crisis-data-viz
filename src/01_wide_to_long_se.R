@@ -165,13 +165,16 @@ specific_outcomes <- data_long_w2 %>%
 
 specifics_out_long <- specific_outcomes %>% 
   group_by(record_id, outcomes_yn) %>% 
-  tidyr::gather(out_op, out_specific, 3:ncol(specific_outcomes)) %>% 
+  tidyr::gather(key = out_op, 
+                value = out_specific, 
+                3:ncol(specific_outcomes)) %>% 
   filter(!is.na(out_specific)) %>% #filter out missing
   #filter(!(str_detect(out_specific, "9090") & out_op == "outcome")) %>% 
   #filter(!str_detect(out_specific, "998|999|997")) %>% 
   #filter(!str_detect(out_specific, "997")) %>% 
   mutate(out_op = ifelse(out_op == "outcome", "outcome_other", out_op)) %>% 
-  arrange(record_id, out_specific)
+  arrange(record_id, out_specific) %>% 
+  filter(!(str_detect(out_specific, "9090")))
 
 # can't filter out the 999,997 and 998 bc they are needed to link to the impact
 other_out_only <- data_long_w2 %>%  select(record_id, outcome_type, outcome)
@@ -180,10 +183,11 @@ other_ids <- unique(other_out_only$record_id[str_detect(other_out_only$outcome_t
 other_out_onlyb <- other_out_only %>% 
   filter(record_id %in% other_ids) %>% 
   mutate(outcome_type = ifelse(str_detect(outcome_type, "other"), outcome_type, NA)) %>% 
-  nest(data=c(outcome_type, outcome))%>% 
+  nest(data=c(outcome_type, outcome)) %>% 
   mutate(data = map(data, ~ map_dfc(., na.omit))) %>% 
   unnest(cols=c(data)) %>% 
-  rename(other_outcome = outcome, out_specific = outcome_type) %>% 
+  rename(other_outcome = outcome, 
+         out_specific = outcome_type) %>% 
   mutate(out_op = "outcome_type")
 
 other_out_sub <- specifics_out_long %>% 
@@ -191,31 +195,41 @@ other_out_sub <- specifics_out_long %>%
   filter(str_detect(out_specific, "9090|999|997|998") & out_op != "outcome_type") %>% 
   select(-outcomes_yn) %>% 
   #group_by(record_id, out_op) %>% 
-  arrange(record_id) %>% mutate(merge_code = ifelse(str_detect(out_specific, "9090_2"), 998, 
-                                                    ifelse(str_detect(out_specific, "9090_3"), 997, 
-                                                           ifelse(str_detect(out_specific, "999|998|997"), NA, 
-                                                                  999))))
+  arrange(record_id) %>% 
+  mutate(merge_code = ifelse(str_detect(out_specific, "9090_2"), 998, 
+                             ifelse(str_detect(out_specific, "9090_3"), 997, 
+                                    ifelse(str_detect(out_specific, "999|998|997"), NA, 
+                                           999)
+                                    )
+                             )
+         )
 
-a_sub <- other_out_sub %>% filter(is.na(merge_code)) %>% 
+a_sub <- other_out_sub %>% 
+  filter(is.na(merge_code)) %>% 
   mutate(merge_code = as.numeric(substr(out_specific, 1, 3)))
 
-b_sub <- other_out_sub %>%  filter(!is.na(merge_code)) %>% 
+b_sub <- other_out_sub %>%
+  filter(!is.na(merge_code)) %>% 
   rename(other_outcome = out_specific)
 
 
-combo_sub <- a_sub %>% left_join(b_sub, by = c("record_id", "out_op", "merge_code")) %>% 
+combo_sub <- a_sub %>% 
+  left_join(b_sub, by = c("record_id", "out_op", "merge_code")) %>% 
   select(-merge_code)
 
 other_out_onlyc <- bind_rows(other_out_onlyb, combo_sub)
-specifics_out_long <- filter(specifics_out_long, !(str_detect(out_specific, "9090")))
+
 
 # create combo var in the lookup
-lookup_b <- lookup %>% rename(out_op = variable_merge) %>% 
+lookup_b <- lookup %>% 
+  rename(out_op = variable_merge) %>% 
   unite(out_specific, c(code, code_name), remove = FALSE)#%>% select(out_op, out_specific, impact_var)
 
-##merge on specific out to specfic impact based on combo var (code + code_name) in lookup
-##if out_op = outcome_type and out_specific = other 1 then impact is same as other 1
-#lookup_c <- lookup_b %>%  filter()
+
+# merge on specific out to specfic impact based on combo var (code + code_name) in lookup
+# if out_op = outcome_type and out_specific = other 1 then impact is same as other 1
+# lookup_c <- lookup_b %>%  filter()
+
 specifics_policy_out_f <- specifics_policy_f %>% 
   left_join(specifics_out_long, by = "record_id") %>% 
   mutate(outcomes_yn = ifelse(is.na(outcomes_yn), "0", outcomes_yn)) %>% 
@@ -259,11 +273,12 @@ final_mod_cor_policy<- final_mod %>%
                                                     ifelse(str_detect(policy_specific, regex("services available on release from corrections|pre-release (from prison) counselling", ignore_case = T)), "9090_release_from_prison_services",
                                                            ifelse(str_detect(policy_specific, regex("prescription heroin|heroin prescription|heroine-assisted treatment|9090_HAT", ignore_case=T)), "9090_prescription_heroin",
                                                                   ifelse(str_detect(policy_specific, regex("ER/LA|risk evaluation and mitigation|REMS", ignore_case = T)), "9090_ER/LA Risk Evaluation and Mitigation Strategy", policy_specific))))
-                                             
-                                             
-                                             
-                                             
-                                      ))) %>% 
-  select(record_id, policy_type, policy_op, policy_specific, policy_specific_new, everything())
+                                             ))) %>% 
+  select(record_id, 
+         policy_type,
+         policy_op, 
+         policy_specific, 
+         policy_specific_new, 
+         everything())
 
 
