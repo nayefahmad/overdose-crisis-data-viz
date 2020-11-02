@@ -1,3 +1,6 @@
 docs/
 .Rproj.user
-dst/
+*.png
+*.css
+*.js
+*.pdf
