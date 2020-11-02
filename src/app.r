@@ -164,7 +164,12 @@ server <- function(input, output, session){
   
   
   output$out_table <- renderDataTable(
-    df2_filtered() 
+    df2_filtered() %>% 
+      datatable(extensions = 'Buttons',
+                options = list(dom = 'Bfrtip', 
+                               buttons = c("csv"), 
+                               pageLength = 15), 
+                filter = "top")
   )
   
   
