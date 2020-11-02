@@ -24,12 +24,14 @@ specifics_policy_f = get_specifics_policy_f(data_long_w2, policy_types)
 other_out_onlyb = get_other_out_onlyb(data_long_w2)
 specifics_out_long = get_specifics_out_long(data_long_w2)
 other_out_sub = get_other_out_sub(specifics_out_long)
-other_out_onlyc = get_other_out_onlyc(other_out_sub)
+other_out_onlyc = get_other_out_onlyc(other_out_sub, other_out_onlyb)
 final_mod_cor_policy = get_final_mod_cor_policy(specifics_policy_f, 
                                                 data_long_w2, 
                                                 specifics_out_long, 
                                                 lookup_b, 
                                                 other_out_onlyc)
-
-
+analy_pop_f = get_analy_pop_f(data_long_w2)
+join_pop_mod_cor = left_join(final_mod_cor_policy, 
+                             analy_pop_f, 
+                             by = c("record_id" = "record_id"))
 

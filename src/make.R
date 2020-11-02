@@ -32,13 +32,16 @@ plan <- drake_plan(
                                                     lookup_b, 
                                                     other_out_onlyc), 
     analy_pop_f = get_analy_pop_f(data_long_w2),
+    join_pop_mod_cor = left_join(final_mod_cor_policy, 
+                                 analy_pop_f, 
+                                 by = c("record_id" = "record_id")),
     
     # write outputs: 
-    clean_data_file = write_csv(clean_data, file_out("dst/clean_data.csv")),
-    data_long_w2_file = write_csv(data_long_w2, file_out("dst/data_long_w2.csv")), 
-    final_mod_cor_policy_file = write_csv(final_mod_cor_policy, file_out("dst/final_mod_cor_policy.csv")), 
-    analy_pop_f_file = write_csv(analy_pop_f, file_out("dst/analy_pop_f.csv"))
-    
+    clean_data_file = write_csv(clean_data, file_out("dst/01_clean_data.csv")),
+    data_long_w2_file = write_csv(data_long_w2, file_out("dst/02_data_long_w2.csv")), 
+    final_mod_cor_policy_file = write_csv(final_mod_cor_policy, file_out("dst/03_final_mod_cor_policy.csv")), 
+    analy_pop_f_file = write_csv(analy_pop_f, file_out("dst/04_analy_pop_f.csv")), 
+    join_pop_mod_cor_file = write_csv(join_pop_mod_cor, file_out("dst/05_join_pop_mod_cor_file.csv"))
 )
 
 make(plan)
