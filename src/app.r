@@ -13,9 +13,16 @@ library(dbplyr)
 library(lubridate)
 library(shiny)
 library(shinyWidgets)
+library(DT)
 
+# set up data ---- 
+df1_all_data <- 
+  read_csv(here("dst", "05_join_pop_mod_cor_file.csv"))
 
-# df1_refdes_list <- data.frame()
+cols <- colnames(df1_all_data)
+
+continent <- df1_all_data
+
 
 # __________----
 # 2) UI ----------
@@ -31,7 +38,7 @@ ui <- fluidPage(
     # > 2.1) Panel 1 ----------
     
     tabPanel(
-      title = "Plots",
+      title = "Tables",
       value = "page_1",  # page identifier
       
       # >> Header ----
@@ -51,7 +58,7 @@ ui <- fluidPage(
           wellPanel(
             # WUC selection
             pickerInput(
-              inputId = "param_refdes", 
+              inputId = "input_demo", 
               label   = "Selection",
               choices = c("Option 1", "Option 2"),
               multiple = FALSE, 
@@ -60,14 +67,23 @@ ui <- fluidPage(
                 liveSearch = TRUE,
                 size = 10
               )
-            )
+            ), 
+            
+            selectizeInput(
+              inputId = "input_cols", 
+              label = "Select columns", 
+              choices = cols, 
+              selected = c("record_id", "policy_type"), 
+              multiple = TRUE,
+              options = NULL)
           )
         ), 
         
         # >> Plot outputs -----
         column(
-          width = 6, 
-          div(plotOutput(outputId = "out_plot", height = 500)) 
+          width = 9,
+          h4("Data"), 
+          div(dataTableOutput(outputId = "out_table")) 
         ) 
       ) 
     ), 
@@ -83,6 +99,16 @@ ui <- fluidPage(
 # 3) Server -----------
 # __________----
 server <- function(input, output, session){
+  df2_filtered <- 
+    reactive(
+      df1_all_data %>% 
+        select(input$input_cols)
+    ) 
+  
+  
+  output$out_table <- renderDataTable(
+    df2_filtered() 
+  )
   
   
 }
