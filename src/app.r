@@ -32,8 +32,6 @@ country_regions <-
 country_regions <- 
   country_regions[(!is.na(country_regions))]  %>% 
   unname()
-country_regions2 <- sapply(country_regions, function(x){substr(x, 3, nchar(x))})  
-
 
 
 # __________----
@@ -88,12 +86,13 @@ ui <- fluidPage(
               )
             ), 
             
+            
             # Column selection 
             selectizeInput(
               inputId = "input_cols", 
               label = "Select columns", 
               choices = cols, 
-              selected = c("record_id", "country_region", "policy_type"), 
+              selected = c("record_id", "year_study", "country_region", "policy_type"), 
               multiple = TRUE,
               options = NULL)
           )
