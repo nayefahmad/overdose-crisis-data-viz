@@ -5,7 +5,7 @@ The goal of this project is to develop an interactive online visualization tool 
 
 The project is based on the work of a research team led by Dr. Jane Buxton, Professor of the School of Population and Public Health, University of British Columbia (UBC) and Medical Director of Harm Reduction, BC Centre for Disease Control. The research team conducted the literature search, data extraction, and data analysis. 
 
-The resuls of the work can be explored on [this interactive website](https://meenrz.shinyapps.io/overdose-crisis-data-viz_shiny-app/_w_b9597691/_w_2401cab7/). The code for building the interactive visualization is hosted in a separate repository, [here](https://github.com/nayefahmad/overdose-crisis-data-viz_shiny-app)
+The results of the work can be explored on [this interactive website](https://meenrz.shinyapps.io/overdose-crisis-data-viz_shiny-app/_w_b9597691/_w_2401cab7/). The code for building the interactive visualization is hosted in a separate repository, [here](https://github.com/nayefahmad/overdose-crisis-data-viz_shiny-app). 
 
 ## Repository structure
 1. **data**: this folder contains the original data collected by the research team 
@@ -25,7 +25,7 @@ If you want to make changes to the data processing that was done in this reposit
 ### 2. Changes in Shiny app repository 
 1. Download the latest version of the repository for building the Shiny app, which is located [here](https://github.com/nayefahmad/overdose-crisis-data-viz_shiny-app). 
 2. The shiny app reads in a single file that is an output from the data processing repository - currently, this file is named `05_join_pop_mod_cor_file.csv` and it is saved in the data processing repo [here](https://raw.githubusercontent.com/nayefahmad/overdose-crisis-data-viz/master/dst/05_join_pop_mod_cor_file.csv). If you have made changes in the data processing repo, then you will have to change the code in the `data_preprocessing.R` file to read in the new data. Specifically, you have to change line 20. 
-3. Once you've read in the new data, click the "Run App" button. This will launch the app on your computer, but will not change the live version of the app.
+3. Once you've read in the new data, click the "Run App" button in RStudio. This will launch the app on your computer, but will not change the live version of the app.
 4. When the app runs locally in RStudio, there will be an option to publish the app in the top right corner of the window. Click that button, and you will be asked to log in to a shinyapps.io account. After logging in to the account you want to use, you can re-publish the app. This will ensure that your changes are reflected in the live version of the app.
 
 
