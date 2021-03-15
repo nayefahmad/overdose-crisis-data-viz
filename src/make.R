@@ -9,6 +9,7 @@ plan <- drake_plan(
     # read in files: 
     raw_data = read_csv(file_in("data/ScopingReviewOfOpioi-FinalResults_DATA_2020-07-06_1942.csv")), 
     lookup = read_csv(file = file_in("data/lookup_rd.csv")), 
+    ref_lookup = read_csv(file = file_in("data/references_lookup.csv")) %>% select(record_id, Reference), 
     
     # processing; 
     lookup_a = lookup %>% select(-impact_var), 
@@ -35,13 +36,15 @@ plan <- drake_plan(
     join_pop_mod_cor = left_join(final_mod_cor_policy, 
                                  analy_pop_f, 
                                  by = c("record_id" = "record_id")),
+    join_with_references = left_join(join_pop_mod_cor, 
+                                     ref_lookup), 
     
     # write outputs: 
     clean_data_file = write_csv(clean_data, file_out("dst/01_clean_data.csv")),
     data_long_w2_file = write_csv(data_long_w2, file_out("dst/02_data_long_w2.csv")), 
     final_mod_cor_policy_file = write_csv(final_mod_cor_policy, file_out("dst/03_final_mod_cor_policy.csv")), 
     analy_pop_f_file = write_csv(analy_pop_f, file_out("dst/04_analy_pop_f.csv")), 
-    join_pop_mod_cor_file = write_csv(join_pop_mod_cor, file_out("dst/05_join_pop_mod_cor_file.csv"))
+    join_pop_mod_cor_file = write_csv(join_with_references, file_out("dst/05_join_pop_mod_cor_file.csv"))
 )
 
 make(plan)

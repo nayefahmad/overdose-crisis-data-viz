@@ -8,6 +8,7 @@ source(here("src", "functions.R"))
 # read in files:
 raw_data = read_csv(file_in("data/ScopingReviewOfOpioi-FinalResults_DATA_2020-07-06_1942.csv")) 
 lookup = read_csv(file = file_in("data/lookup_rd.csv"))
+ref_lookup = read_csv(file = file_in("data/references_lookup.csv")) %>% select(record_id, Reference)
 
 # processing; 
 lookup_a = lookup %>% select(-impact_var)
@@ -34,4 +35,5 @@ analy_pop_f = get_analy_pop_f(data_long_w2)
 join_pop_mod_cor = left_join(final_mod_cor_policy, 
                              analy_pop_f, 
                              by = c("record_id" = "record_id"))
-
+join_with_references = left_join(join_pop_mod_cor, 
+                                 ref_lookup)
